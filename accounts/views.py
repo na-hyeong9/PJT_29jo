@@ -15,10 +15,24 @@ def signin(request):
     form = AuthenticationForm(request, data=request.POST or None)
     if form.is_valid():
         login(request, form.get_user())
-        return redirect("reviews:index")
+        return redirect("accounts:signup")
     return render(request, "accounts/signin.html", {"form": form})
 
 @login_required
 def signout(request):
     logout(request)
     return redirect('accounts:signin')
+
+def detail(request, username):
+    info = get_object_or_404(get_user_model(), username=username)
+    return render(request, "accounts/detail.html", {"person": info})
+
+@login_required
+def follow(request, user_pk):
+    person = get_object_or_404(get_user_model(), pk=user_pk)
+    if person != request.user:
+        if person.followers.filter(pk=request.user.pk).exists():
+            person.followers.remove(request.user)
+        else:
+            person.followers.add(request.user)
+    return redirect("accounts:profile", person.username)
