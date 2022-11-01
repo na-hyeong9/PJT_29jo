@@ -1,3 +1,12 @@
+.non_a {
+  color: black;
+  text-decoration: none;
+}
+
+.non_a:hover {
+  color: #34c5f0;
+}
+
 .header {
   position: sticky;
   top: 0px;
@@ -44,4 +53,9 @@
   border: 1px solid;
   margin: 0 50px;
   color: #34c5f0;
+}
+
+.section-grid {
+  display: grid;
+  grid-template-columns: 25fr 50fr 25fr;
 }

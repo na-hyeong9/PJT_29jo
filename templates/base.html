@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>모레의집</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -49,9 +49,9 @@
           </form>
         </div>
         {% if request.user.is_authenticated %}
+        <div><a class="non_a nmc" href="{% url 'accounts:detail' user.username %}">{{ user.username }}님</a></div>
         <div><a class="text-body text-decoration-none" href="{% url 'accounts:signout' %} "><span
               class="nmc">로그아웃</span></a></div>
-        <div><span class="nmc">내정보</span></div>
 
         {% else %}
         <div><a class="text-body text-decoration-none" href="{% url 'accounts:signin' %} "><span
