@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'reviews',
+    'products',
     'django_bootstrap5',
     'imagekit',
     "django.contrib.admin",
