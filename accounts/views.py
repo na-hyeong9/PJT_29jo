@@ -4,6 +4,10 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
+def index(request):
+    users = get_user_model().objects.all()
+    return render(request, "accounts/index.html", {"users": users})
+
 def signup(request):
     form = CustomUserCreationForm(request.POST or None)
     if form.is_valid():
