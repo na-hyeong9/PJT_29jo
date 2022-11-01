@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <header>
+  <nav>
     <div class="header">
       <div class="header_main">
         <div class="nav_start">
@@ -48,16 +48,21 @@
             <input class="header_input p-3" placeholder="스토어 검색" />
           </form>
         </div>
-        <div><a class="text-body text-decoration-none" href="{% url 'accounts:signup' %} "><span
+        {% if request.user.is_authenticated %}
+        <div><a class="text-body text-decoration-none" href="{% url 'accounts:signout' %} "><span
+              class="nmc">로그아웃</span></a></div>
+        <div><span class="nmc">내정보</span></div>
+
+        {% else %}
+        <div><a class="text-body text-decoration-none" href="{% url 'accounts:signin' %} "><span
               class="nmc">로그인</span></a></div>
         <div><a class="text-body text-decoration-none" href="{% url 'accounts:signup' %} "><span
               class="nmc">회원가입</span></a></div>
         <div><span class="nmc">고객센터</span></div>
-
+        {% endif %}
       </div>
     </div>
-
-  </header>
+  </nav>
   {% block content %}{% endblock %}
 
   <footer>

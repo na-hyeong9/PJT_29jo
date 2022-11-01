@@ -25,12 +25,13 @@
       <a
         href="https://kauth.kakao.com/oauth/authorize?client_id=d860d38c992ca8bf5f07dcc3fd5122b9&redirect_uri=http://localhost:9090/member/auth/kakao/callback&response_type=code"></a>
     </div>
-
-    <div class="login_api">
-      <a href="/oauth2/authorization/google"></a>
-    </div>
     <input type="submit" class="btn py-2 form-control fw-bold" style="background-color: #35c5f0; color: white"
       value="회원가입완료">
   </form>
+  <hr>
+  <div class="d-flex justify-content-center">
+    <p style="color: rgba(194, 200, 204, 1)">이미 회원이라면? <a class="text-decoration-none" style="color:#35c5f0"
+        href="{% url 'accounts:signin' %}">로그인</a></p>
+  </div>
 </div>
 {% endblock %}
