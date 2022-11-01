@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="container mt-5" style="width: 360px;">
+  <h3 class="fw-bold mb-4">회원가입</h3>
+  <form action="{% url 'accounts:signup' %}" method="POST">
+    {% csrf_token %}
+    <h6 class="fw-bold my-3">아이디</h6>
+    <div class="my-3">
+      <input class="form-control" type="text" name="username" placeholder="아이디">
+    </div>
+
+    <h6 class="fw-bold my-3">비밀번호</h6>
+    <div class="my-3">
+      <input class="form-control" type="password" name="password1" placeholder="비밀번호">
+    </div>
+
+    <div class="my-3">
+      <input class="form-control" type="password" name="password2" placeholder="비밀번호 확인">
+    </div>
+
+    <div class="login_api">
+      <a
+        href="https://kauth.kakao.com/oauth/authorize?client_id=d860d38c992ca8bf5f07dcc3fd5122b9&redirect_uri=http://localhost:9090/member/auth/kakao/callback&response_type=code"></a>
+    </div>
+
+    <div class="login_api">
+      <a href="/oauth2/authorization/google"></a>
+    </div>
+    <input type="submit" class="btn py-2 form-control fw-bold" style="background-color: #35c5f0; color: white"
+      value="회원가입완료">
+  </form>
+</div>
+{% endblock %}
