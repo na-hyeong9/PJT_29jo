@@ -1,0 +1,47 @@
+.header {
+  position: sticky;
+  top: 0px;
+  width: auto;
+  height: 80px;
+  background-color: #ffffff;
+  letter-spacing: -.4px;
+}
+
+.header_main {
+  display: flex;
+  align-items: center;
+  /* background-color: beige; */
+  /* background-color: green; */
+  border-bottom: 1px solid #eaedef;
+  /* position: fixed; */
+  max-width: 1256px;
+  justify-content: space-between;
+  height: 80px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 10px 60px;
+}
+
+.logo {
+  margin-right: 35px;
+}
+
+.nmc {
+  margin: 0 10px;
+  padding: 21px 5px 15px;
+}
+
+.nmc_1 {
+  margin: 0 10px;
+  padding: 21px 5px 15px;
+  font-weight: lighter;
+}
+
+.header_input {
+  border-radius: 5px;
+  width: 286px;
+  height: 40px;
+  border: 1px solid;
+  margin: 0 50px;
+  color: #34c5f0;
+}

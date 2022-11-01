@@ -1,0 +1,72 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+  <header>
+    <div class="header">
+      <div class="header_main">
+        <div class="nav_start">
+          <a class="main_logo" alt="오늘의집 로고" href="#">
+            <img class="logo" src="{% static 'img/logo.png' %}" alt="오늘의집 홈" width="74" height="30" viewBox="0 0 74 30">
+          </a>
+        </div>
+        <!-- <div class="nav_left"> -->
+        <div class="nav_main">
+          <a clsss="nav_main_content">
+            <span class="nmc" href="/index.html"><b>커뮤니티</b></span>
+          </a>
+        </div>
+        <div class="nav_main">
+          <a clsss="nav_main_content">
+            <span class="nmc" href="/index.html"><b>스토어</b></span>
+          </a>
+        </div>
+        <div class="nav_main">
+          <a clsss="nav_main_content">
+            <span class="nmc" href="/index.html"><b>이사/시공/수리</b></span>
+          </a>
+        </div>
+        <!-- </div> -->
+        <div class="nav_search">
+          <form class="search_form">
+            <input class="header_input" placeholder="스토어 검색" />
+          </form>
+        </div>
+        <div><span class="nmc">로그인</span></div>
+        <div><span class="nmc">회원가입</span></div>
+        <div><span class="nmc">고객센터</span></div>
+
+      </div>
+    </div>
+
+  </header>
+  {% block content %}{% endblock %}
+
+  <footer>
+    <!-- place footer here -->
+  </footer>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
