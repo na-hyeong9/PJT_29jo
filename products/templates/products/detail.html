@@ -1,4 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h1>정상작동</h1>
+  <h1>리뷰</h1>
+  {% for review in reviews %}
+  <div class="accordion" id="accordionPanelsStayOpenExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-{{ review.pk }}" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+          {{ review.user }} | {{ review.grade_1 }} | {{ review.created_at }}
+        </button>
+      </h2>
+      <div id="panelsStayOpen-{{ review.pk }}" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+        <div class="accordion-body">
+          <div>
+            {{ review.content }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 {% endblock %}
