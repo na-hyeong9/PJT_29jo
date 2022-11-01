@@ -4,9 +4,11 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
+
 def index(request):
     users = get_user_model().objects.all()
     return render(request, "accounts/index.html", {"users": users})
+
 
 def signup(request):
     form = CustomUserCreationForm(request.POST or None)
@@ -15,6 +17,7 @@ def signup(request):
         return redirect("accounts:signup")
     return render(request, "accounts/signup.html", {"form": form})
 
+
 def signin(request):
     form = AuthenticationForm(request, data=request.POST or None)
     if form.is_valid():
@@ -22,14 +25,17 @@ def signin(request):
         return redirect("accounts:signup")
     return render(request, "accounts/signin.html", {"form": form})
 
+
 @login_required
 def signout(request):
     logout(request)
-    return redirect('accounts:signin')
+    return redirect("accounts:signin")
+
 
 def detail(request, username):
     info = get_object_or_404(get_user_model(), username=username)
     return render(request, "accounts/detail.html", {"person": info})
+
 
 @login_required
 def follow(request, user_pk):
@@ -39,4 +45,4 @@ def follow(request, user_pk):
             person.followers.remove(request.user)
         else:
             person.followers.add(request.user)
-    return redirect("accounts:profile", person.username)
+    return redirect("accounts:detail", person.username)
