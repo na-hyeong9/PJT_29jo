@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="container mt-5" style="width: 360px;">
+  <h3 class="fw-bold mb-4">로그인</h3>
+  <form action="{% url 'accounts:signin' %}" method="POST">
+    {% csrf_token %}
+    <h6 class="fw-bold my-3">아이디</h6>
+    <div class="my-3">
+      <input class="form-control" type="text" name="username" placeholder="아이디">
+    </div>
+
+    <h6 class="fw-bold my-3">비밀번호</h6>
+    <div class="my-3">
+      <input class="form-control" type="password" name="password" placeholder="비밀번호">
+    </div>
+
+    <input type="submit" class="btn py-2 form-control fw-bold" style="background-color: #35c5f0; color: white"
+      value="로그인">
+  </form>
+  <hr>
+  <div class="d-flex justify-content-center">
+    <p><a class="text-decoration-none" style="color: rgba(194, 200, 204, 1)" href="{% url 'accounts:signup' %}">회원가입</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

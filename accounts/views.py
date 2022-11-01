@@ -10,3 +10,15 @@ def signup(request):
         login(request, form.save())
         return redirect("accounts:signup")
     return render(request, "accounts/signup.html", {"form": form})
+
+def signin(request):
+    form = AuthenticationForm(request, data=request.POST or None)
+    if form.is_valid():
+        login(request, form.get_user())
+        return redirect("reviews:index")
+    return render(request, "accounts/signin.html", {"form": form})
+
+@login_required
+def signout(request):
+    logout(request)
+    return redirect('accounts:signin')
