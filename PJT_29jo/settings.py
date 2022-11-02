@@ -32,11 +32,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'products',
-    'accounts',
-    'django_bootstrap5',
-    'imagekit',
-    'star_ratings',
+    "products",
+    "accounts",
+    "articles",
+    "django_bootstrap5",
+    "imagekit",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -139,4 +139,4 @@ MEDIA_LOOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = "accounts.User"

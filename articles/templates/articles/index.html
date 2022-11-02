@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="section-grid p-5">
+    <div>
+        <div class="d-flex justify-content-center mt-3">
+            <div class="row p-3 d-flex" style="width:100%; background-color:white">
+                <div class="card m-2 col-lg-4">
+                    <img src="https://mblogthumb-phinf.pstatic.net/20110926_159/levas2021_1317026319398ibHFo_JPEG/72k_02_diada890j.jpg?type=w2"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">퉁퉁이 피규어1
+                        </p>
+                    </div>
+                </div>
+                <div class="card m-2 col-lg-4">
+                    <img src="https://mblogthumb-phinf.pstatic.net/20110926_135/levas2021_1317026318586t44EJ_JPEG/72k_01_diada890j.jpg?type=w2"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">퉁퉁이 피규어2</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="user-wrap" style="width: 100%; height: 300px;">
+            <div class="user-image">
+            </div>
+            <div class="user-text">
+                <!-- title -->
+                <p class="fs-2 fw-bold text-white">안녕?</p>
+                <!-- username/ create_at -->
+                <p class="fw-bold text-white">김나형 2222-22-22</p>
+            </div>
+        </div>
+    </div>
+    <div>3</div>
+</div>
+{% endblock %}
