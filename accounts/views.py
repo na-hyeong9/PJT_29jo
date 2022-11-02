@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import get_user_model, login, logout
-from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .forms import *
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
@@ -40,3 +40,30 @@ def follow(request, user_pk):
         else:
             person.followers.add(request.user)
     return redirect("accounts:detail", person.username)
+
+@login_required
+def edit(request):
+    if request.method == "POST":
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect("accounts:detail", request.user.username)
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+    context = {
+        "form": form,
+    }
+    return render(request, "accounts/edit.html", context)
+
+def delete(request):
+    form = CheckPasswordForm(request.user)
+    if request.method == 'POST':
+        form = CheckPasswordForm(request.user, request.POST)
+        if form.is_valid():
+            request.user.delete()
+            logout(request)
+            return redirect('accounts:index')
+    context = {
+        'form': form,
+    }
+    return render(request, 'accounts/delete.html', context)
