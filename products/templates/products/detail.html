@@ -1,22 +1,63 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h1>리뷰</h1>
+  <h1>리뷰
+    <span>
+      <a href="{% url 'products:reviews_create' product.pk %}">리뷰쓰기</a>
+    </span>
+  </h1>
+  <h3>제품의 항목별 전체 평점</h3>
+  내구성 :
+  {{ grade_all.grade_durability__avg|floatformat }}
+  | 가격:
+  {{ grade_all.grade_price__avg|floatformat }}
+  | 디자인:
+  {{ grade_all.grade_design__avg|floatformat }}
+  | 실용성:
+  {{ grade_all.grade_practicality__avg|floatformat }}
   {% for review in reviews %}
-  <div class="accordion" id="accordionPanelsStayOpenExample">
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-{{ review.pk }}" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-          {{ review.user }} | {{ review.grade_1 }} | {{ review.created_at }}
-        </button>
-      </h2>
-      <div id="panelsStayOpen-{{ review.pk }}" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-        <div class="accordion-body">
-          <div>
-            {{ review.content }}
+    <!-- 버튼 -->
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-{{ review.pk }}" aria-expanded="false" aria-controls="panelsStayOpen-{{ review.pk }}">
+            작성자 :
+            {{ review.user }}
+            | 작성자 평균 평점 :
+            {{ review.grade_avg }}
+            | 작성일 :{{ review.created_at }}
+          </button>
+        </h2>
+        <!-- 내용 -->
+        <div id="panelsStayOpen-{{ review.pk }}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+          <div class="accordion-body">
+            <div>
+              <h3>항목별 평점</h3>
+              내구성 :
+              {{ review.grade_durability }}
+              | 가격 :
+              {{ review.grade_price }}
+              | 디자인 :
+              {{ review.grade_design }}
+              | 실용성 :
+              {{ review.grade_practicality }}
+              {% if review.review_image %}
+                <p>
+                  <img src="{{ review.review_image.url }}" alt="" width="300" height="300">
+                </p>
+              {% else %}
+                <p>
+                  {{ review.content }}
+                </p>
+              {% endif %}
+            </div>
+            <a href="{% url 'products:reviews_update' product.pk review.pk%}">수정하기</a>
+            <a href="{% url 'products:reviews_delete' product.pk review.pk %}">삭제하기</a>
+            <a href="{% url 'products:reviews_likes' product.pk review.pk %}">좋아요</a>
+            <p>좋아요 |
+              {{ user.like_reviews.count }}</p>
           </div>
         </div>
       </div>
     </div>
-  </div>
   {% endfor %}
 {% endblock %}
