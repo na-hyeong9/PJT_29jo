@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load django_bootstrap5 %}
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-{% endblock %}
 
-{% block body %}
-<div class="my-3 container text-white">
+{{ aritcles.click }}
+{% block content %}
+<div class="my-3 container">
     <p class="fs-3 fw-bold">{{ article.title }}</p>
 
     {% if article.image %}
@@ -22,7 +20,6 @@
             {% endif %}<span id="like-count">{{ article.like_users.count }}</span>
         {% endif %}
     </div>
-
     <p class="my-5">{{ article.content }}</p>
     <div class="d-flex justify-content-end">
         <a class="nav_a btn btn-link" href="{% url 'articles:index' %}">돌아가기</a>
@@ -45,7 +42,6 @@
                         삭제하면 내용을 되돌릴 수 없습니다.
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                         <a class="btn btn-danger" href="{% url 'articles:delete' article.pk %}">삭제하기</a>
                         </button>
                     </div>
@@ -68,7 +64,6 @@
             {% endif %}
         </li>
         {% empty %}
-        <p>댓글이 없어요..</p>
         {% endfor %}
     </ul>
 

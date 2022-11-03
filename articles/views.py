@@ -11,7 +11,11 @@ from django.http import JsonResponse
 
 def index(request):
     articles = Article.objects.order_by("-pk")
-    context = {"articles": articles}
+    articles_hits = Article.objects.order_by("-hits")
+    context = {
+        "articles": articles,
+        "articles_hits": articles_hits,
+    }
     return render(request, "articles/index.html", context)
 
 
@@ -38,6 +42,11 @@ def detail(request, pk):
     # 특정 글을 가져온다.
     article = Article.objects.get(pk=pk)
     comment_form = CommentForm()
+    # 조회수 측정
+
+    article.hits += 1
+    article.save()
+
     # template에 객체 전달
     context = {
         "article": article,
