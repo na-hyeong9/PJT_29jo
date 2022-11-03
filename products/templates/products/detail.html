@@ -126,7 +126,11 @@
               <a href="{% url 'products:reviews_delete' product.pk review.pk %}">삭제하기</a>
               <a href="{% url 'products:reviews_likes' product.pk review.pk %}">좋아요</a>
               <p>좋아요 |
-                {{ user.like_reviews.count }}</p>
+                {{ review.review_likes.count }}
+                {% for us in review.review_likes.all %}
+                  <span>{{ us }}</span>
+                {% endfor %}
+              </p>
             </div>
           </div>
         </div>
