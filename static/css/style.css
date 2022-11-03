@@ -101,17 +101,17 @@ label:focus,
 }
 
 /* star-rating */
-
 .star-ratings {
-  color: #aaa9a9; 
+  color: #aaa9a9;
   position: relative;
   unicode-bidi: bidi-override;
   width: max-content;
-  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-fill-color: transparent;
+  /* Will override color (regardless of order) */
   -webkit-text-stroke-width: 0.3px;
   -webkit-text-stroke-color: #a0a0a0;
 }
- 
+
 .star-ratings-fill {
   color: #82E0FA;
   padding: 0;
@@ -123,7 +123,7 @@ label:focus,
   overflow: hidden;
   -webkit-text-fill-color: #35C5F0;
 }
- 
+
 .star-ratings-base {
   z-index: 0;
   padding: 0;
@@ -141,23 +141,24 @@ label:focus,
   width: 5em;
   margin-left: 30px;
 }
- 
+
 .star-rating input {
   display: none;
 }
- 
+
 .star-rating label {
-  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-fill-color: transparent;
+  /* Will override color (regardless of order) */
   -webkit-text-stroke-width: 1.3px;
   -webkit-text-stroke-color: #a0a0a0;
   cursor: pointer;
 }
- 
-.star-rating :checked ~ label {
+
+.star-rating :checked~label {
   -webkit-text-fill-color: #35C5F0;
 }
- 
+
 .star-rating label:hover,
-.star-rating label:hover ~ label {
+.star-rating label:hover~label {
   -webkit-text-fill-color: #82E0FA;
 }
