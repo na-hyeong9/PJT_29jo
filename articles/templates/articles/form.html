@@ -1,28 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load django_bootstrap5 %}
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-{% endblock %}
 
 {% block content %}
-<!-- 확인된 URL을 나타내는 ResolverMatch 인스턴스입니다. 이 속성은 URL이 해결된 후에만 설정되며, URL이 해결되기 전에 실행되는 미들웨어에서는 사용할 수 없지만 모든 보기에서 사용할 수
-있습니다(process_view()에서 사용할 수 있습니다). -->
-
-<div class="container">
-    {% if request.resolver_match.url_name == 'create' %}
-    <h1 class="my-3 text-center">인테리어 후기 작성</h1>
-    {% else %}
-    <h1 class="my-3 text-center"></h1>
-    {% endif %}
-
-    <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% bootstrap_form article_form %}
-        <div class="d-flex justify-content-end">
-            <input type="submit" class="btn-sm btn py-2 fw-bold" style="background-color: #33c4f0; color: white"
-            value="작성완료">
-        </div>
-    </form>
+<div class="container my-5" style="width: 700px">
+    <div class="p-4" style="box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%); border-radius: 15px;">
+        <form class="p-5" action="{% url 'articles:create' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class=" d-flex justify-content-end">
+                <input class="btn" style="color: #33c4f0;" type="submit" value="작성완료"></input>
+            </div>
+            <h2><input class="input-title form-control mb-3" style="border:0px; font-size: 1.5rem;" name="title"
+                    placeholder="제목"></h2>
+            <hr>
+            <textarea rows="40" cols="10" class="form-control mt-3" style="border:0px" name="content"
+                placeholder="내용"></textarea>
+            <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/jpg">
+        </form>
+    </div>
 </div>
 {% endblock %}
