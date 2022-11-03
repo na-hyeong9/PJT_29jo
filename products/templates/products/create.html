@@ -1,9 +1,88 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% block content %}
+<div class="col-6 mx-auto p-5">
   <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form forms %}
-    <input type="submit" class="btn btn-outlint-primary">
+    {% comment %} 내구성 {% endcomment %}
+    <div class="d-flex container align-items-bottom">
+      <div class="fw-bold" style="line-height: 50px;">
+        내구성
+      </div>
+      <div class="star-rating">
+        <input type="radio" id="5-grade_durability" name="grade_durability" value="5"/>
+        <label for="5-grade_durability" class="star pr-4">★</label>
+        <input type="radio" id="4-grade_durability" name="grade_durability" value="4"/>
+        <label for="4-grade_durability" class="star">★</label>
+        <input type="radio" id="3-grade_durability" name="grade_durability" value="3"/>
+        <label for="3-grade_durability" class="star">★</label>
+        <input type="radio" id="2-grade_durability" name="grade_durability" value="2"/>
+        <label for="2-grade_durability" class="star">★</label>
+        <input type="radio" id="1-grade_durability" name="grade_durability" value="1"/>
+        <label for="1-grade_durability" class="star">★</label>
+      </div>
+    </div>
+
+    <div class="d-flex container align-items-bottom">
+      <div class="fw-bold" style="line-height: 50px;">
+        디자인
+      </div>
+      <div class="star-rating">
+      <input type="radio" id="5-grade_design" name="grade_design" value="5"/>
+      <label for="5-grade_design" class="star pr-4">★</label>
+      <input type="radio" id="4-grade_design" name="grade_design" value="4"/>
+      <label for="4-grade_design" class="star">★</label>
+      <input type="radio" id="3-grade_design" name="grade_design" value="3"/>
+      <label for="3-grade_design" class="star">★</label>
+      <input type="radio" id="2-grade_design" name="grade_design" value="2"/>
+      <label for="2-grade_design" class="star">★</label>
+      <input type="radio" id="1-grade_design" name="grade_design" value="1"/>
+      <label for="1-grade_design" class="star">★</label>
+    </div>
+    </div>
+
+    <div class="d-flex container align-items-bottom">
+      <div class="fw-bold" style="line-height: 50px;">
+        실용성
+      </div>
+      <div class="star-rating">
+      <input type="radio" id="5-grade_practicality" name="grade_practicality" value="5"/>
+      <label for="5-grade_practicality" class="star pr-4">★</label>
+      <input type="radio" id="4-grade_practicality" name="grade_practicality" value="4"/>
+      <label for="4-grade_practicality" class="star">★</label>
+      <input type="radio" id="3-grade_practicality" name="grade_practicality" value="3"/>
+      <label for="3-grade_practicality" class="star">★</label>
+      <input type="radio" id="2-grade_practicality" name="grade_practicality" value="2"/>
+      <label for="2-grade_practicality" class="star">★</label>
+      <input type="radio" id="1-grade_practicality" name="grade_practicality" value="1"/>
+      <label for="1-grade_practicality" class="star">★</label>
+    </div>
+  </div>
+
+  <div class="d-flex container align-items-bottom">
+    <div class="fw-bold ms-3" style="line-height: 50px;">
+      가격
+    </div>
+    <div class="star-rating">
+      <input type="radio" id="5-grade_price" name="grade_price" value="5"/>
+      <label for="5-grade_price" class="star pr-4">★</label>
+      <input type="radio" id="4-grade_price" name="grade_price" value="4"/>
+      <label for="4-grade_price" class="star">★</label>
+      <input type="radio" id="3-grade_price" name="grade_price" value="3"/>
+      <label for="3-grade_price" class="star">★</label>
+      <input type="radio" id="2-grade_price" name="grade_price" value="2"/>
+      <label for="2-grade_price" class="star">★</label>
+      <input type="radio" id="1-grade_price" name="grade_price" value="1"/>
+      <label for="1-grade_price" class="star">★</label>
+    </div>
+  </div>
+
+  <div class="d-grid mt-5">
+    <input type="submit" value="완료" class="btn btn-primary">
+  </div>
+
   </form>
+</div>
+
 {% endblock %}

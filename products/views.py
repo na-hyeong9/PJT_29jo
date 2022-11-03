@@ -11,33 +11,52 @@ def detail(request, product_pk):
     product = get_object_or_404(Product, pk=product_pk)
     reviews = Review.objects.all()
     grade_all = reviews.aggregate(Avg('grade_durability'), Avg('grade_price'), Avg('grade_design'), Avg('grade_practicality'))
+    grade_avg = reviews.aggregate(Avg('grade_avg'))
     # 키 -값 쌍으로
   
     context = {
         "product" : product,
         "reviews" : reviews,
         "grade_all" : grade_all,
+        "grade_avg" : grade_avg,
     }
     return render(request, "products/detail.html", context)
 
 def reviews_create(request, product_pk):
-    product = Product.objects.get(pk=product_pk)
     if request.method == "POST":
-        forms = ReviewCreationForm(request.POST, request.FILES)
-        if forms.is_valid():
-            review = forms.save(commit=False)
-            review.user = request.user
-            review.product = product
-            grade_1 = review.grade_durability
-            grade_2 = review.grade_price
-            grade_3 = review.grade_design
-            grade_4 = review.grade_practicality
+        product = Product.objects.get(pk=product_pk)
+        # if request.method == "POST":
+        #     print(request)
+            # forms = ReviewCreationForm(request.POST, request.FILES)
+            # if forms.is_valid():
+                # review = forms.save(commit=False)
+                # print(review)
+        user = request.user
+        content = request.POST.get('content')
+        review_image = request.FILES.get('review_image')
+        grade_1 = request.POST.get('grade_durability')
+        grade_2 = request.POST.get('grade_price')
+        grade_3 = request.POST.get('grade_design')
+        grade_4 = request.POST.get('grade_practicality')
+        print(type(grade_4))
+        avg_list = list(map(float, [grade_1, grade_2, grade_3, grade_4]))
+        avg_score = statistics.mean(avg_list)
+        
+        review = Review()
+        review.content = content
+        review.product = product
+        review.user = user
+        review.review_image = review_image
+        review.grade_durability = grade_1
+        review.grade_price = grade_2
+        review.grade_design = grade_3
+        review.grade_practicality = grade_4
+        print(type(review.grade_practicality))
+        review.grade_avg = avg_score
+        review.save()
             # 변수명에 어떤 필드인지 직관적으로 알 수 있도록
-            avg_list = [grade_1, grade_2, grade_3, grade_4]
-            avg_score = statistics.mean(avg_list)
-            review.grade_avg = avg_score
-            review.save()
-            return redirect("products:detail", product_pk)
+        print(review.grade_practicality, type(review.grade_practicality))
+        return redirect("products:detail", product_pk)
         
     else:
         forms = ReviewCreationForm()
