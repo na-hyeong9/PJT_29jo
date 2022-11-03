@@ -30,10 +30,14 @@
             <div class="user-image">
             </div>
             <div class="user-text">
+                {% for article in articles %}
+                {% if article.review_image %}
                 <!-- title -->
-                <p class="fs-2 fw-bold text-white">안녕?</p>
+                <a href="{% url 'articles:detail' articles.pk %}"><span class="fs-2 fw-bold text-white">안녕?</span></a>
                 <!-- username/ create_at -->
                 <p class="fw-bold text-white">김나형 2222-22-22</p>
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>
