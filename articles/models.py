@@ -14,6 +14,7 @@ class Article(models.Model):
     like_users = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="like_articles"
     )
+    image = models.ImageField(upload_to="images/", blank=True)
     hits = models.PositiveIntegerField(default=0)
 
     @property

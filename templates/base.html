@@ -48,14 +48,6 @@
         <div><a class="non_a nmc" href="{% url 'accounts:detail' user.username %}">{{ user.username }}님</a></div>
         <div><a class="text-body text-decoration-none" href="{% url 'accounts:signout' %} "><span
               class="nmc">로그아웃</span></a></div>
-        <div><a class="btn btn text-white" style="background-color:#35c5f0" href="{% url 'accounts:signup' %} "><span
-              class="nmc">글쓰기</span></a></div>
-        {% else %}
-        <div><a class="text-body text-decoration-none" href="{% url 'accounts:signin' %} "><span
-              class="nmc">로그인</span></a></div>
-        <div><a class="text-body text-decoration-none" href="{% url 'accounts:signup' %} "><span
-              class="nmc">회원가입</span></a></div>
-        <div><span class="nmc">고객센터</span></div>
         <div class="dropdown">
           <div class="dropdown">
             <button class="btn btn dropdown-toggle text-white" style="background-color:#35c5f0" type="button"
@@ -69,9 +61,28 @@
               </li>
             </ul>
           </div>
-          {% endif %}
+          {% else %}
+          <div><a class="text-body text-decoration-none" href="{% url 'accounts:signin' %} "><span
+                class="nmc">로그인</span></a></div>
+          <div><a class="text-body text-decoration-none" href="{% url 'accounts:signup' %} "><span
+                class="nmc">회원가입</span></a></div>
+          <div><span class="nmc">고객센터</span></div>
+          <div class="dropdown">
+            <div class="dropdown">
+              <button class="btn btn dropdown-toggle text-white" style="background-color:#35c5f0" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                글쓰기
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="non_a" href="#"><button class="dropdown-item" type="button">인테리어 후기</button></a>
+                </li>
+                <li><a class="non_a" href="#"><button class="dropdown-item" type="button">상품 후기</button></a>
+                </li>
+              </ul>
+            </div>
+            {% endif %}
+          </div>
         </div>
-      </div>
   </nav>
   {% block content %}{% endblock %}
 
