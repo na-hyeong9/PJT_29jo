@@ -9,10 +9,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <script src="https://kit.fontawesome.com/9dfbf66130.js" crossorigin="anonymous"></script>
   <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js"
-  integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL"
-  crossorigin="anonymous"></script>
+    integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL"
+    crossorigin="anonymous"></script>
   <script>
-  Kakao.init('03136f2726faff9cad61468b2f5c1270'); // 사용하려는 앱의 JavaScript 키 입력
+    Kakao.init('03136f2726faff9cad61468b2f5c1270'); // 사용하려는 앱의 JavaScript 키 입력
   </script>
   <!-- CSS only -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -28,20 +28,20 @@
     <div class="header">
       <div class="header_main">
         <div class="nav_start">
-          <a class="main_logo" alt="오늘의집 로고" href="#">
+          <a class="main_logo" alt="오늘의집 로고" href="{% url 'articles:index' %}">
             <img class="logo" src="{% static 'img/logo3.png' %}" alt="오늘의집 홈" width="100" height="30"
               viewBox="0 0 74 30">
           </a>
         </div>
         <!-- <div class="nav_left"> -->
         <div class="nav_main">
-          <a clsss="nav_main_content">
-            <span class="nmc" href="/index.html"><b>커뮤니티</b></span>
+          <a clsss="nav_main_content" style="text-decoration: none; color:black;" href="{% url 'products:detail' 1 %}">
+            <span class=" nmc"><b>상품후기</b></span>
           </a>
         </div>
         <div class="nav_main">
-          <a clsss="nav_main_content">
-            <span class="nmc" href="/index.html"><b>스토어</b></span>
+          <a clsss="nav_main_content" style="text-decoration: none; color:black;" href="{% url 'articles:detail' 1 %}">
+            <span class=" nmc" href="/index.html"><b>인테리어후기</b></span>
           </a>
         </div>
 
@@ -79,7 +79,7 @@
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" href="{% url 'articles:create' %}">인테리어 후기</a></li>
-            <li><a class="dropdown-item" href="#">상품 후기</a></li>
+            <li><a class="dropdown-item" href="{% url 'products:reviews_create' 1%}">상품 후기</a></li>
           </ul>
         </div>
         {% endif %}
