@@ -4,116 +4,166 @@
 
 {{ aritcles.click }}
 {% block content %}
-<div class="my-3 container">
-    <p class="fs-3 fw-bold">{{ article.title }}</p>
 
-    {% if article.image %}
-    <img src="{{ article.image.url }}" alt="{{ article.image }}" width=p00" height="300">
-    {% endif %}
-    <div class="my-2">
-        <!-- 로그인 했다면 -->
-        {% if request.user.is_authenticated %}
+<body style="background-color: #F7F9FA">
+    <section class="title-banner">
+        <div class='d-flex justify-content-center' style='height:300px;'>
+            {% if article.image %}
+            <img src="https://mblogthumb-phinf.pstatic.net/20151217_196/tamanoa_14503391844435U1wV_JPEG/%C5%FC%C5%FC%C0%CC_1.jpg?type=w2"
+                alt="" class='w-100' style='height:300px; object-fit:cover; filter:brightness(0.6);'>
+        </div>
+        {% else %}
+        <div class="bg-dark w-100" style="height: 300px"></div>
+        {% endif %}
+        <div class="title-text d-flex justify-content-center align-items-center flex-column">
+            <h3 class="fw-bold text-white" style="font-size: 38px;">{{article.title}}</h3>
+            <div>
+                <p class="text-white" style="font-weight: 200">작성자 | {{article.created_at|date:'Y.m.d'}}</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="my-3 p-4 container" style="background-color:white; width: 700px;">
+        <p style="line-height: 32px; color: rgb(47, 52, 56); font-weight: 300;">
+            적당한 빛만 있으면 사진이 알아서 잘 나오는 줄 알았던 저 에디터 밤. '분명 똑같은 건데.. 내 사진은 왜 저 느낌이 안 나지?' 고민하곤 했는데요. 요즘엔 휴대폰 카메라도, 어플도 모두 잘
+            되어 있으니 휴대폰으로 '한 끗 차이로 잘 찍는 법'을 잔뜩 연구해 봤습니다. 그 두 번째 사진 기록 팁을 전격 공개합니다👀
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. A ipsum facilis, eum laudantium ducimus
+            exercitationem doloribus, saepe qui deleniti, provident nesciunt. Rem atque illo ratione magnam eius eum,
+            doloremque vel?
+            Totam inventore modi minima facere doloremque voluptatum rerum dolorem dolorum adipisci dolor amet in saepe
+            aut, non odit accusantium, sequi quaerat ullam nulla! Enim illo quaerat eum est veniam! Unde!
+            Officia atque dolorem beatae quo incidunt iste consequuntur pariatur corrupti cum suscipit. Beatae molestiae
+            voluptas, quam deleniti labore facere, impedit corporis reprehenderit ipsum quod, sit laboriosam aperiam
+            pariatur eum iusto.
+            At fugit facilis, provident, excepturi eaque aliquam quidem nihil, fugiat reiciendis qui quibusdam repellat
+            repudiandae quis? Dignissimos nesciunt ut totam animi error eos, magni porro sapiente aperiam quo saepe
+            eaque.
+            Earum nulla amet at obcaecati expedita explicabo suscipit molestias nesciunt eius dolorum? Culpa, sit quam
+            rem iste quasi nihil? Accusantium excepturi quasi optio vero impedit numquam voluptatibus corporis sunt qui?
+            Fugiat, natus quia! Quam voluptates quae et sint, voluptas ad laborum soluta, ipsam error modi impedit
+            debitis adipisci saepe libero fugiat quidem quis ipsa aliquid incidunt voluptatem eius id! Odio.
+            Laboriosam dolores quo, aperiam neque in eveniet, adipisci beatae eos nemo nihil dolor itaque similique
+            odio? Rerum doloremque tenetur adipisci amet molestiae quis velit vero minus quod, pariatur laudantium
+            similique!
+            Earum officiis culpa harum rem labore? Labore commodi eum possimus cupiditate fugit ducimus dignissimos id,
+            molestias nesciunt ullam similique saepe veniam sunt repellendus ex corporis quod ipsam aspernatur soluta
+            dolorem.
+            Incidunt, dolore praesentium voluptatibus officiis minima soluta nostrum quis, dicta nisi, dignissimos
+            saepe. Sequi expedita dignissimos accusantium iure quo ab illum voluptatem? Doloremque, eum fuga ullam
+            quibusdam sequi at quam.
+            Sit, esse aperiam? Aspernatur quibusdam, ullam maxime illum beatae blanditiis facilis debitis asperiores
+            veniam voluptate autem, consectetur, atque saepe expedita itaque? Pariatur quo deserunt dolores a nisi nemo
+            illo quisquam?
+        </p>
+        {% if article.image %}
+        <img src="{{ article.image.url }}" alt="{{ article.image }}" width=p00" height="300">
+        {% endif %}
+        <div class="my-2">
+            <!-- 로그인 했다면 -->
+            {% if request.user.is_authenticated %}
             {% if request.user in article.like_users.all %}
-            <i  id="like-btn" data-article-id="{{ article.pk }}" class="fa-solid fa-heart"></i>
+            <i id="like-btn" data-article-id="{{ article.pk }}" class="fa-solid fa-heart"></i>
             {% else %}
-            <i  id="like-btn" data-article-id="{{ article.pk }}" class="fa-regular fa-heart"></i>
+            <i id="like-btn" data-article-id="{{ article.pk }}" class="fa-regular fa-heart"></i>
             {% endif %}<span id="like-count">{{ article.like_users.count }}</span>
-        {% endif %}
-    </div>
-    <p class="my-5">{{ article.content }}</p>
-    <div class="d-flex justify-content-end">
-        <a class="nav_a btn btn-link" href="{% url 'articles:index' %}">돌아가기</a>
-        {% if request.user == article.user %}
-        <a class="nav_a btn btn-link" href="{% url 'articles:update' article.pk %}">수정</a>
-        {% endif %}
-        <!-- 삭제 모달 -->
-        <a class="nav_a btn btn-link" data-bs-toggle="modal" data-bs-target="#delete-modal">
-            삭제
-        </a>
-        <!-- Modal -->
-        <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-liber" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="delete-liber">삭제하시겠습니까?</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        삭제하면 내용을 되돌릴 수 없습니다.
-                    </div>
-                    <div class="modal-footer">
-                        <a class="btn btn-danger" href="{% url 'articles:delete' article.pk %}">삭제하기</a>
-                        </button>
+            {% endif %}
+        </div>
+        <p class="my-5">{{ article.content }}</p>
+        <div class="d-flex justify-content-end">
+            <a class="nav_a btn btn-link" href="{% url 'articles:index' %}">돌아가기</a>
+            {% if request.user == article.user %}
+            <a class="nav_a btn btn-link" href="{% url 'articles:update' article.pk %}">수정</a>
+            {% endif %}
+            <!-- 삭제 모달 -->
+            <a class="nav_a btn btn-link" data-bs-toggle="modal" data-bs-target="#delete-modal">
+                삭제
+            </a>
+            <!-- Modal -->
+            <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-liber" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="delete-liber">삭제하시겠습니까?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            삭제하면 내용을 되돌릴 수 없습니다.
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-danger" href="{% url 'articles:delete' article.pk %}">삭제하기</a>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <hr>
+        <p class="my-3" style="color: rgb(115, 115, 115)">댓글 <span
+                style="font-weight: 500; color:#33c4f0;">{{article.comment_set.all|length}}</span></p>
+        <ul class="menu">
+            {% for comment in comments %}
+            <li>
+                {{ comment.user }} - {{ comment.content }}
+                <!--delete-->
+                {% if user == comment.user %}
+                <form action="{% url 'articles:comments_delete' article.pk comment.pk %}" method="POST"
+                    class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit">삭제</button>
+                </form>
+                {% endif %}
+            </li>
+            {% empty %}
+            {% endfor %}
+        </ul>
+
+        <hr>
+
+        <!--create-->
+        {% if request.user.is_authenticated %}
+        <form action="{% url 'articles:comment_create' article.pk %}" method="POST">
+            {% csrf_token %}
+            <div class="row d-flex justify-content-center align-items-center">
+                <textarea class="comment-input p-3" rows="2" cols="10" class="form-control mt-3" name="content"
+                    placeholder="댓글을 남겨주세요."></textarea>
+                <div class="d-flex justify-content-end p-0">
+                    <input class="btn" type="submit" style="color:#33c4f0" value="작성">
+                </div>
+            </div>
+        </form>
+        {% else %}
+        <a href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a>
+        {% endif %}
     </div>
-    <hr>
-    <p class="my-3">댓글</p>
-    <ul class="menu">
-        {% for comment in comments %}
-        <li>
-            {{ comment.user }} - {{ comment.content }}
-            <!--delete-->
-            {% if user == comment.user %}
-            <form action="{% url 'articles:comments_delete' article.pk comment.pk %}" method="POST" class="d-inline">
-                {% csrf_token %}
-                <button type="submit">삭제</button>
-            </form>
-            {% endif %}
-        </li>
-        {% empty %}
-        {% endfor %}
-    </ul>
-
-    <hr>
-
-    <!--create-->
-    {% if request.user.is_authenticated %}
-    <form action="{% url 'articles:comment_create' article.pk %}" method="POST">
-        {% csrf_token %}
-        <div class="row d-flex align-items-center">
-            <div class=" col-11 p-0">
-                {% bootstrap_form comment_form layout='floating'%}
-            </div>
-            <div class="col-1">
-                <button class="btn btn-light" type="submit">등록</button>
-            </div>
-        </div>
-    </form>
-    {% else %}
-    <a href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a>
-    {% endif %}
-</div>
+</body>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-  // (1) 좋아요 버튼
-  const likeBtn = document.querySelector('#like-btn')
-  // (2) 좋아요 버튼을 클릭하면, 함수 실행
-  likeBtn.addEventListener('click', function (event) {
-    // 서버로 비동기 요청을 하고 싶음
-    console.log(event.target.dataset)
-    axios({
-      method: 'get',
-      url: `/articles/${event.target.dataset.articleId}/like/`
+    // (1) 좋아요 버튼
+    const likeBtn = document.querySelector('#like-btn')
+    // (2) 좋아요 버튼을 클릭하면, 함수 실행
+    likeBtn.addEventListener('click', function (event) {
+        // 서버로 비동기 요청을 하고 싶음
+        console.log(event.target.dataset)
+        axios({
+            method: 'get',
+            url: `/articles/${event.target.dataset.articleId}/like/`
+        })
+            .then(response => {
+                console.log(response)
+                console.log(response.data)
+                // event.target.classList.toggle('bi-heart')
+                // event.target.classList.toggle('bi-heart-fill')
+                if (response.data.isLiked === true) {
+                    event.target.classList.add('bi-heart-fill')
+                    event.target.classList.remove('bi-heart')
+                } else {
+                    event.target.classList.add('bi-heart')
+                    event.target.classList.remove('bi-heart-fill')
+                }
+                const likeCount = document.querySelector('#like-count')
+                likeCount.innerText = response.data.likeCount
+            })
     })
-    .then(response => {
-      console.log(response)
-      console.log(response.data)
-      // event.target.classList.toggle('bi-heart')
-      // event.target.classList.toggle('bi-heart-fill')
-      if (response.data.isLiked === true) {
-        event.target.classList.add('bi-heart-fill')
-        event.target.classList.remove('bi-heart')
-      } else {
-        event.target.classList.add('bi-heart')
-        event.target.classList.remove('bi-heart-fill')
-      }
-      const likeCount = document.querySelector('#like-count')
-      likeCount.innerText = response.data.likeCount
-    })
-  })
 </script>
 {% endblock %}

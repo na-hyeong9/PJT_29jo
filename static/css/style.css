@@ -31,6 +31,7 @@ label:focus,
   height: 80px;
   background-color: #ffffff;
   letter-spacing: -.4px;
+  z-index: 1;
 }
 
 .header_main {
@@ -161,4 +162,25 @@ label:focus,
 .star-rating label:hover,
 .star-rating label:hover~label {
   -webkit-text-fill-color: #82E0FA;
+}
+
+/* article detail */
+.title-banner {
+  position: relative;
+}
+
+.title-text {
+  position: absolute;
+  left: 50%;
+  bottom: 2rem;
+  transform: translate(-50%, -50%);
+}
+
+.comment-input {
+  border: 0px solid #34c5f0;
+}
+
+.comment-input:focus {
+  border: 1px solid #34c5f0;
+  border-radius: 10px;
 }
