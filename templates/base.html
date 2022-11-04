@@ -55,13 +55,21 @@
         <div><a class="non_a nmc" href="{% url 'accounts:detail' user.username %}">{{ user.username }}님</a></div>
         <div><a class="text-body text-decoration-none" href="{% url 'accounts:signout' %} "><span
               class="nmc">로그아웃</span></a></div>
+        <a class="p-2 position-relative non_a" href="{% url 'articles:index' %}">
+          장바구니
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+            style="background-color: #35c5f0;">
+            99+
+            <span class="visually-hidden">unread messages</span>
+          </span>
+        </a>
         <!-- 후기  -->
-        <div class="dropdown">
+        <div class="dropdown mx-4">
           <button class="btn btn dropdown-toggle text-white" style="background-color:#35c5f0" type="button"
             data-bs-toggle="dropdown" aria-expanded="false">
             글쓰기
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <ul class=" dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" href="{% url 'articles:create' %}">인테리어 후기</a></li>
             <li><a class="dropdown-item" href="#">상품 후기</a></li>
           </ul>
