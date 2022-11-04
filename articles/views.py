@@ -4,6 +4,8 @@ from .forms import ArticleForm, CommentForm, PostSearchForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import JsonResponse
+from products.models import Product
+from django.db.models import Q
 
 
 # Create your views here.
@@ -17,6 +19,26 @@ def index(request):
         "articles_hits": articles_hits,
     }
     return render(request, "articles/index.html", context)
+
+def search_result(request):
+    kw = request.GET.get('kw', '')  # 검색어
+    # products = Product.objects.order_by('created_at')
+    if kw:
+        products = Product.objects.filter(
+            Q(title__icontains=kw) |  
+            Q(brand__icontains=kw)
+            ).distinct()
+            # Q(author__username__icontains=kw) |  # 질문 글쓴이 검색
+            # Q(answer__author__username__icontains=kw)  # 답변 글쓴이 검색
+        articles = Article.objects.filter(
+            Q(title__icontains=kw) |  
+            Q(content__icontains=kw)
+            ).distinct()
+        context = {
+            "products" : products,
+            "articles" : articles,
+        }
+        return render(request, "articles/search.html", context)
 
 
 @login_required

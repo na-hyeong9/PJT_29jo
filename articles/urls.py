@@ -17,4 +17,5 @@ urlpatterns = [
         name="comments_delete",
     ),
     path("<int:pk>/like/", views.like, name="like"),
+    path("search/", views.search_result, name="search"),
 ]
