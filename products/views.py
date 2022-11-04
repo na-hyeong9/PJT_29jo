@@ -1,5 +1,5 @@
 import statistics
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, resolve_url
 from .models import Product, Review
 from .forms import ReviewCreationForm
 from django.db.models import Avg
@@ -38,7 +38,6 @@ def reviews_create(request, product_pk):
         grade_2 = request.POST.get('grade_price')
         grade_3 = request.POST.get('grade_design')
         grade_4 = request.POST.get('grade_practicality')
-        print(type(grade_4))
         avg_list = list(map(float, [grade_1, grade_2, grade_3, grade_4]))
         avg_score = statistics.mean(avg_list)
         
@@ -51,12 +50,10 @@ def reviews_create(request, product_pk):
         review.grade_price = grade_2
         review.grade_design = grade_3
         review.grade_practicality = grade_4
-        print(type(review.grade_practicality))
         review.grade_avg = avg_score
         review.save()
             # 변수명에 어떤 필드인지 직관적으로 알 수 있도록
-        print(review.grade_practicality, type(review.grade_practicality))
-        return redirect("products:detail", product_pk)
+        return redirect('{}#review_{}'.format(resolve_url('products:detail', product_pk), review.id))
         
     else:
         forms = ReviewCreationForm()
@@ -71,7 +68,7 @@ def reviews_update(request, product_pk, review_pk):
             forms = ReviewCreationForm(request.POST, request.FILES, instance=review)
             if forms.is_valid():
                 forms.save()
-                return redirect("products:detail", product_pk)
+                return redirect('{}#review_{}'.format(resolve_url('products:detail', product_pk), review.id))
         
         else:
             forms = ReviewCreationForm(instance=review)
