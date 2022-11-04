@@ -49,8 +49,10 @@
     {{ grade_all.grade_design__avg|floatformat }}
     | 실용성:
     {{ grade_all.grade_practicality__avg|floatformat }}
+
     {% for review in reviews %}
-      <button type="button" class="btn btn-light">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
+    <button type="button" class="btn btn-light">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
+    <a id="review_{{ review.pk }}"></a>
       {% post_to_facebook object_or_url "Post to Facebook!" %}
       {% post_to_twitter "New Song: . Check it out!" object_or_url "Post to Twitter" %}
       {% copy_to_clipboard object_or_url "Copy to clipboard!" %}
@@ -59,11 +61,26 @@
         <div class="accordion-item">
           <h2 class="accordion-header" id="panelsStayOpen-headingOne">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-{{ review.pk }}" aria-expanded="false" aria-controls="panelsStayOpen-{{ review.pk }}">
-              작성자 :
-              {{ review.user }}
-              | 작성자 평균 평점 :
-              {{ review.grade_avg }}
-              | 작성일 :{{ review.created_at }}
+              <div class="container d-flex justify-content-between">
+                <div>
+                  작성자 :
+                  {{ review.user }}
+                  | 작성자 평균 평점 :
+                  {{ review.grade_avg }}
+                </div>
+                <div>
+                  <!-- 작성일자 : ~시간 전 표시 -->
+                  {% if review.created_string == False %}
+                  <!-- 7일이 지나면 날짜로 출력 -->
+                  {{ review.created_at|date:'m월 d일' }}
+                {% else %}
+                <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
+                  {{ review.created_string }}
+                {% endif %}
+                </div>
+              </div>
+
+
             </button>
           </h2>
           <!-- 내용 -->
