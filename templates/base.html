@@ -53,9 +53,8 @@
         </div>
         {% if request.user.is_authenticated %}
         <div><a class="non_a nmc" href="{% url 'accounts:detail' user.username %}">{{ user.username }}님</a></div>
-        <div><a class="text-body text-decoration-none" href="{% url 'accounts:signout' %} "><span
-              class="nmc">로그아웃</span></a></div>
-        <a class="p-2 position-relative non_a" href="{% url 'articles:index' %}">
+
+        <a class="p-2 position-relative non_a" href="">
           장바구니
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
             style="background-color: #35c5f0;">
@@ -63,8 +62,10 @@
             <span class="visually-hidden">unread message</span>
           </span>
         </a>
+        <div><a class="text-body text-decoration-none" href="{% url 'accounts:signout' %} "><span
+              class="nmc">로그아웃</span></a></div>
         <!-- 후기  -->
-        <div class="dropdown mx-4">
+        <div class="dropdown">
           <button class="btn btn dropdown-toggle text-white" style="background-color:#35c5f0" type="button"
             data-bs-toggle="dropdown" aria-expanded="false">
             글쓰기
