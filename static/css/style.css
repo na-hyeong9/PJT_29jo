@@ -134,7 +134,7 @@ label:focus,
 .star-rating {
   display: flex;
   flex-direction: row-reverse;
-  font-size: 2.25rem;
+  font-size: 1.5rem;
   line-height: 2.5rem;
   justify-content: space-around;
   padding: 0 0.2em;

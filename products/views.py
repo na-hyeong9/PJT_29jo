@@ -33,7 +33,7 @@ def reviews_create(request, product_pk):
                 # print(review)
         user = request.user
         content = request.POST.get('content')
-        review_image = request.FILES.get('review_image')
+        review_image = request.FILES.get('image')
         grade_1 = request.POST.get('grade_durability')
         grade_2 = request.POST.get('grade_price')
         grade_3 = request.POST.get('grade_design')
