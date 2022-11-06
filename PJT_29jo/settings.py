@@ -26,7 +26,7 @@ SECRET_KEY = os.path.join(BASE_DIR, "secrets.json")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "imagekit",
     "cart",
     "django_bootstrap5",
-    'django_social_share',
+    "django_social_share",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

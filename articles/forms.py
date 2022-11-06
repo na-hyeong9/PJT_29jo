@@ -7,7 +7,11 @@ from .models import Article, Comment
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ["title", "content", "image"]
+        fields = [
+            "title",
+            "content",
+            "image",
+        ]
 
 
 class CommentForm(forms.ModelForm):
