@@ -54,7 +54,7 @@
         {% if request.user.is_authenticated %}
         <div><a class="non_a nmc" href="{% url 'accounts:detail' user.username %}">{{ user.username }}님</a></div>
 
-        <a class="p-2 position-relative non_a" href="">
+        <a class="p-2 position-relative non_a" href="{% url 'cart:my_cart' %}">
           장바구니
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
             style="background-color: #35c5f0;">
