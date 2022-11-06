@@ -1,159 +1,168 @@
 {% extends 'base.html' %}
 {% load social_share %}
 {% block content %}
-  <div class="container p-5">
-    <!-- 상품 -->
-    <section>
-      <div class="d-flex align-items-center flex-column">
-        <div class="m-3">
-          <img src="{{ product.product_image.url }}" alt="" width="300" height="300">
-        </div>
+<div class="container p-5">
+  <!-- 상품 -->
+  <section>
+    <div class="d-flex align-items-center flex-column">
+      <div class="m-3">
+        <img src="{{ product.product_image.url }}" alt="" width="300" height="300">
       </div>
-      <p class="text-muted fs-4">
-        {{ product.brand }}
-      </p>
-      <h3 class="fw-bold">
-        {{ product.title }}
-      </h3>
-      <p class="fs-4">
-        {{ product.price }}
-      </p>
-    </section>
-    <br>
-    <div class="display-2 d-flex align-items-end">
-      <div class="star-ratings">
-        <div class="star-ratings-fill space-x-2 text-lg" style="width: calc({{ grade_avg.grade_avg__avg }}* 20%);">
-          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-        </div>
-        <div class="star-ratings-base space-x-2 text-lg">
-          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-        </div>
-      </div>
-      <span class="fw-bold display-3 align-text-bottom mt-2 mx-3" style="line-height: 65px;">
-        {{ grade_avg.grade_avg__avg|floatformat }}
-      </span>
     </div>
-
-    <br>
-    <h1>리뷰
-      <span>
-        <a href="{% url 'products:reviews_create' product.pk %}">리뷰쓰기</a>
-      </span>
-    </h1>
-
-    내구성 :
-    {{ grade_all.grade_durability__avg|floatformat }}
-    | 가격:
-    {{ grade_all.grade_price__avg|floatformat }}
-    | 디자인:
-    {{ grade_all.grade_design__avg|floatformat }}
-    | 실용성:
-    {{ grade_all.grade_practicality__avg|floatformat }}
-
-    {% for review in reviews %}
-    <button type="button" class="btn btn-light">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
-    <a id="review_{{ review.pk }}"></a>
-      {% post_to_facebook object_or_url "Post to Facebook!" %}
-      {% post_to_twitter "New Song: . Check it out!" object_or_url "Post to Twitter" %}
-      {% copy_to_clipboard object_or_url "Copy to clipboard!" %}
-      <!-- 버튼 -->
-      <div class="accordion" id="accordionPanelsStayOpenExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-{{ review.pk }}" aria-expanded="false" aria-controls="panelsStayOpen-{{ review.pk }}">
-              <div class="container d-flex justify-content-between">
-                <div>
-                  작성자 :
-                  {{ review.user }}
-                  | 작성자 평균 평점 :
-                  {{ review.grade_avg }}
-                </div>
-                <div>
-                  <!-- 작성일자 : ~시간 전 표시 -->
-                  {% if review.created_string == False %}
-                  <!-- 7일이 지나면 날짜로 출력 -->
-                  {{ review.created_at|date:'m월 d일' }}
-                {% else %}
-                <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
-                  {{ review.created_string }}
-                {% endif %}
-                </div>
-              </div>
-
-
-            </button>
-          </h2>
-          <!-- 내용 -->
-          <div id="panelsStayOpen-{{ review.pk }}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
-            <div class="accordion-body">
-              <div>
-                <h3>항목별 평점</h3>
-                <div class="d-flex">
-                  내구성 :
-                  <div class="star-ratings">
-                    <div class="star-ratings-fill" style="width: calc({{ review.grade_durability }} * 20%);">
-                      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-                    <div class="star-ratings-base">
-                      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-                  </div>
-                  | 가격 :
-                  <div class="star-ratings">
-                    <div class="star-ratings-fill space-x-2 text-lg" style="width: calc({{ review.grade_price }} * 20%);">
-                      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-                    <div class="star-ratings-base space-x-2 text-lg">
-                      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="d-flex">
-
-                  | 디자인 :
-                  <div class="star-ratings">
-                    <div class="star-ratings-fill space-x-2 text-lg" style="width: calc({{ review.grade_design }} * 20%);">
-                      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-                    <div class="star-ratings-base space-x-2 text-lg">
-                      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-                  </div>
-                  | 실용성 :
-                  <div class="star-ratings">
-                    <div class="star-ratings-fill space-x-2 text-lg" style="width: calc({{ review.grade_practicality }} * 20%);">
-                      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-                    <div class="star-ratings-base space-x-2 text-lg">
-                      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-                  </div>
-                </div>
-
-                {% if review.review_image %}
-                  <p>
-                    <img src="{{ review.review_image.url }}" alt="" width="300" height="300">
-                  </p>
-                {% endif %}
-                <p>
-                  {{ review.content }}
-                </p>
-              </div>
-              <a href="{% url 'products:reviews_update' product.pk review.pk%}">수정하기</a>
-              <a href="{% url 'products:reviews_delete' product.pk review.pk %}">삭제하기</a>
-              <a href="{% url 'products:reviews_likes' product.pk review.pk %}">좋아요</a>
-              <p>좋아요 |
-                {{ review.review_likes.count }}
-                {% for us in review.review_likes.all %}
-                  <span>{{ us }}</span>
-                {% endfor %}
-              </p>
-            </div>
-          </div>
-        </div>
+    <p class="text-muted fs-4">
+      {{ product.brand }}
+    </p>
+    <h3 class="fw-bold">
+      {{ product.title }}
+    </h3>
+    <p class="fs-4">
+      {{ product.price }}
+    </p>
+  </section>
+  <br>
+  <div class="display-2 d-flex align-items-end">
+    <div class="star-ratings">
+      <div class="star-ratings-fill space-x-2 text-lg" style="width: calc({{ grade_avg.grade_avg__avg }}* 20%);">
+        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
       </div>
-    {% endfor %}
+      <div class="star-ratings-base space-x-2 text-lg">
+        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+      </div>
+    </div>
+    <span class="fw-bold display-3 align-text-bottom mt-2 mx-3" style="line-height: 65px;">
+      {{ grade_avg.grade_avg__avg|floatformat }}
+    </span>
   </div>
 
-  {% add_copy_script %}
+  <br>
+  <h1>리뷰
+    <span>
+      <a href="{% url 'products:reviews_create' product.pk %}">리뷰쓰기</a>
+    </span>
+  </h1>
+  <br>
+  <h1>장바구니 담기
+    <span>
+      <a href="{% url 'cart:add_cart' product.pk %}">장바구니 추가</a>
+    </span>
+  </h1>
+  내구성 :
+  {{ grade_all.grade_durability__avg|floatformat }}
+  | 가격:
+  {{ grade_all.grade_price__avg|floatformat }}
+  | 디자인:
+  {{ grade_all.grade_design__avg|floatformat }}
+  | 실용성:
+  {{ grade_all.grade_practicality__avg|floatformat }}
+
+  {% for review in reviews %}
+  <button type="button" class="btn btn-light">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
+  <a id="review_{{ review.pk }}"></a>
+  {% post_to_facebook object_or_url "Post to Facebook!" %}
+  {% post_to_twitter "New Song: . Check it out!" object_or_url "Post to Twitter" %}
+  {% copy_to_clipboard object_or_url "Copy to clipboard!" %}
+  <!-- 버튼 -->
+  <div class="accordion" id="accordionPanelsStayOpenExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-{{ review.pk }}" aria-expanded="false"
+          aria-controls="panelsStayOpen-{{ review.pk }}">
+          <div class="container d-flex justify-content-between">
+            <div>
+              작성자 :
+              {{ review.user }}
+              | 작성자 평균 평점 :
+              {{ review.grade_avg }}
+            </div>
+            <div>
+              <!-- 작성일자 : ~시간 전 표시 -->
+              {% if review.created_string == False %}
+              <!-- 7일이 지나면 날짜로 출력 -->
+              {{ review.created_at|date:'m월 d일' }}
+              {% else %}
+              <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
+              {{ review.created_string }}
+              {% endif %}
+            </div>
+          </div>
+
+
+        </button>
+      </h2>
+      <!-- 내용 -->
+      <div id="panelsStayOpen-{{ review.pk }}" class="accordion-collapse collapse"
+        aria-labelledby="panelsStayOpen-headingOne">
+        <div class="accordion-body">
+          <div>
+            <h3>항목별 평점</h3>
+            <div class="d-flex">
+              내구성 :
+              <div class="star-ratings">
+                <div class="star-ratings-fill" style="width: calc({{ review.grade_durability }} * 20%);">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <div class="star-ratings-base">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+              </div>
+              | 가격 :
+              <div class="star-ratings">
+                <div class="star-ratings-fill space-x-2 text-lg" style="width: calc({{ review.grade_price }} * 20%);">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <div class="star-ratings-base space-x-2 text-lg">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex">
+
+              | 디자인 :
+              <div class="star-ratings">
+                <div class="star-ratings-fill space-x-2 text-lg" style="width: calc({{ review.grade_design }} * 20%);">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <div class="star-ratings-base space-x-2 text-lg">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+              </div>
+              | 실용성 :
+              <div class="star-ratings">
+                <div class="star-ratings-fill space-x-2 text-lg"
+                  style="width: calc({{ review.grade_practicality }} * 20%);">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <div class="star-ratings-base space-x-2 text-lg">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+              </div>
+            </div>
+
+            {% if review.review_image %}
+            <p>
+              <img src="{{ review.review_image.url }}" alt="" width="300" height="300">
+            </p>
+            {% endif %}
+            <p>
+              {{ review.content }}
+            </p>
+          </div>
+          <a href="{% url 'products:reviews_update' product.pk review.pk%}">수정하기</a>
+          <a href="{% url 'products:reviews_delete' product.pk review.pk %}">삭제하기</a>
+          <a href="{% url 'products:reviews_likes' product.pk review.pk %}">좋아요</a>
+          <p>좋아요 |
+            {{ review.review_likes.count }}
+            {% for us in review.review_likes.all %}
+            <span>{{ us }}</span>
+            {% endfor %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% add_copy_script %}
 {% endblock %}
