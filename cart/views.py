@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from products.models import Product
-from .models import Cart, CartItem
-from django.core.exceptions import objectDoesNotExist
+from accounts.models import User
+from .models import CartItem
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def _cart_id(request):
@@ -12,36 +14,59 @@ def _cart_id(request):
         
     return cart
 
+@login_required
 def add_cart(request, product_id):
-    product = Product.objects.get(id=product_id)
-  
-    try:
-        cart = Cart.objects.get(id=product_id)
-    except Cart.DoesNotExist:
-        cart = Cart.DoesNotExist:
-        cart = Cart.objects.create(cart_id = _cart_id(request))
-        cart.save()
-  
-    try:
-        cart_item = CartItem.objects.get(product=product, cart=cart)
-        cart_item.quantity += 1
-        cart_item.save()
-    
-    except CartItem.DoesNotExist:
-        cart_item = CartItem.objects.create(product=product, quantity=1, cart=cart)
-        cart_item.save()
-    
-    return redirect('cart:cart_detail')
+	# 상품을 담기 위해 해당 상품 객체를 product 변수에 할당
+    product = Product.objects.get(pk=product_id)
 
-def cart_detail(request, total=0, counter=0, cart_items=None):
     try:
-        cart = Cart.objects.get(cart_id=_cart_id(request))
-        cart_items = CartItem.objects.filter(cart=cart, active=True)
-    
-        for cart_item in cart_items:
-        total += (cart_item.product.price * cart_item.quantity)
-        counter += cart_item.quantity
-    except ObjectDoesNotExist:
-        pass
-    
-    return render(request, 'cart.html', dict(cart_items=cart_items, total=total, counter=counter))
+    	# 장바구니는 user 를 FK 로 참조하기 때문에 save() 를 하기 위해 user 가 누구인지도 알아야 함
+        cart = CartItem.objects.get(product__id=product.pk, user__id=request.user.pk)
+        if cart:
+            if cart.product.title == product.title:
+                cart.quantity += 1
+                cart.save()
+    except CartItem.DoesNotExist:
+        user = User.objects.get(pk=request.user.pk)
+        cart = CartItem(
+            user=user,
+            product=product,
+            quantity=1,
+        )
+        cart.save()
+    return redirect('articles:index')
+
+@login_required
+def my_cart(request):
+    """
+    각 유저의 장바구니 공간
+    """
+    cart_item = CartItem.objects.filter(user__id=request.user.pk)
+    # 장바구니에 담긴 상품의 총 합계 가격
+    total_price = 0
+    # for loop 를 순회하여 각 상품 * 수량을 total_price 에 담는다
+    for each_total in cart_item:
+        total_price += each_total.product.price * each_total.quantity
+    if cart_item is not None:
+        context = {
+        	# 없으면 없는대로 빈 conext 를 템플릿 변수에서 사용
+            'cart_item': cart_item,
+            'total_price': total_price,
+        }
+        return render(request, 'cart/cart.html', context)
+    return redirect('product:cart')
+
+# def minus_cart_item(request, -):
+#     cart_item = CartItem.objects.filter(product__id=-)
+#     product = Product.objects.get(pk=-)
+#     try:
+#         for item in cart_item:
+#             if item.product.name == product.name:
+#                 if item.quantity > 1:
+#                     item.quantity -= 1
+#                     item.save()
+#                 return redirect('product:my-cart')
+#             else:
+#                 return redirect('product:my-cart')
+#     except CartItem.DoesNotExist:
+#         raise Http404
