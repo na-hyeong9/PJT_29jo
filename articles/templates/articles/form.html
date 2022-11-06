@@ -3,6 +3,7 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
+
 <div class="container my-5" style="width: 700px">
     <div class="p-4" style="box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%); border-radius: 15px;">
         <form class="p-5" action="{% url 'articles:create' %}" method="POST" enctype="multipart/form-data">
