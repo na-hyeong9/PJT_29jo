@@ -10,7 +10,7 @@ from cart.forms import AddProductForm
 
 def detail(request, product_pk):
     product = get_object_or_404(Product, pk=product_pk)
-    reviews = Review.objects.all()
+    reviews = Review.objects.filter(product=product_pk)
     add_to_cart = AddProductForm(initial={'quantity':1}) # 장바구니 추가
     grade_all = reviews.aggregate(Avg('grade_durability'), Avg('grade_price'), Avg('grade_design'), Avg('grade_practicality'))
     grade_avg = reviews.aggregate(Avg('grade_avg'))
