@@ -30,6 +30,16 @@
                 <div class="card m-2 col-lg-3" style="width: 30%;">
                     <img src="{{ article.image.url }}" class="py-2 card-img-top" alt="..." style="height: 150px;">
                     <div class="card-body">
+                        <div class="my-2">
+                            <!-- 로그인 했다면 -->
+                            {% if request.user.is_authenticated %}
+                            {% if request.user in article.like_users.all %}
+                            <i id="like-btn" class="fa-solid fa-heart"></i>
+                            {% else %}
+                            <i id="like-btn" class="fa-regular fa-heart"></i>
+                            {% endif %}<span id="like-count">{{ article.like_users.count }}</span>
+                            {% endif %}
+                        </div>
                         <h5 class="card-title">{{article.title}}</h5>
                         <p class="card-text">{{article.user}}</p>
                         <p class="card-text"><small class="text-muted">{{article.created_string}}</small>
@@ -43,6 +53,6 @@
         </div>
     </div>
 </div>
-</div>
+
 </div>
 {% endblock %}
