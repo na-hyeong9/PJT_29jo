@@ -90,7 +90,14 @@ label:focus,
   vertical-align: middle;
 }
 
-.user-text {
+.contentcard:hover {
+  border-radius: 15px;
+  transform: translateY(-10px);
+  transition: all ease-in-out .3s;
+  box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%);
+}
+
+/* .user-text {
   position: absolute;
   bottom: -5px;
   left: 60px;
@@ -98,7 +105,7 @@ label:focus,
   font: size 36px;
   font-family: 'card';
   text-align: conter;
-}
+} */
 
 /* star-rating */
 .star-ratings {

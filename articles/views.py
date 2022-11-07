@@ -5,26 +5,36 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import JsonResponse
 from products.models import Product
+from products.models import Review
 from django.db.models import Q
+from django.db.models import Avg
 
 
 # Create your views here.
 
 
 def index(request, category_slug=None):
+    products = Product.objects.order_by("-pk")
     articles = Article.objects.order_by("-pk")
     articles_hits = Article.objects.order_by("-hits")
     current_category = None
     categories = Category.objects.all()
     articles = Article.objects.filter(available_display=True)
+    reviews = Review.objects.all()
+    grade_all = reviews.aggregate(Avg('grade_durability'), Avg('grade_price'), Avg('grade_design'), Avg('grade_practicality'))
+    grade_avg = reviews.aggregate(Avg('grade_avg'))
+
     if category_slug:
         current_category = get_object_or_404(Category, slug=category_slug)
         articles = articles.filter(category=current_category)
     context = {
+        "products": products,
         "articles": articles,
         "articles_hits": articles_hits,
         "current_category": current_category,
         "categories": categories,
+        "grade_all": grade_all,
+        "grade_avg": grade_avg,
     }
     return render(request, "articles/index.html", context)
 
