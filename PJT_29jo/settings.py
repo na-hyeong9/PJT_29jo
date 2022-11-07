@@ -32,14 +32,14 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    "products",
     "accounts",
     "articles",
-    "imagekit",
+    "products",
     "cart",
+    "imagekit",
     "django_bootstrap5",
-    "django_social_share",
     "django.contrib.admin",
+    "django_social_share",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
