@@ -2,27 +2,23 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-  <title>모레의집</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <script src="https://kit.fontawesome.com/9dfbf66130.js" crossorigin="anonymous"></script>
-  <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js"
-    integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL"
-    crossorigin="anonymous"></script>
-  <script>
-    Kakao.init('03136f2726faff9cad61468b2f5c1270'); // 사용하려는 앱의 JavaScript 키 입력
-  </script>
-  <!-- CSS only -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-  {% block css %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}?{% now 'U'%}">
-  {% endblock css %}
+  <head>
+    <title>모레의집</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://kit.fontawesome.com/9dfbf66130.js" crossorigin="anonymous"></script>
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js" integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
+    <script>
+      Kakao.init('03136f2726faff9cad61468b2f5c1270'); // 사용하려는 앱의 JavaScript 키 입력
+    </script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    {% block css %}
+      <link rel="stylesheet" href="{% static 'css/style.css' %}?{% now 'U'%}">
+    {% endblock css %}
 
-</head>
-
+  </head>
 <body>
   <nav>
     <div class="header">
@@ -47,10 +43,12 @@
 
         <!-- </div> -->
         <div class="nav_search">
-          <form class="search_form">
-            <input class="header_input p-3" placeholder="스토어 검색" />
+          <form class="search_form" action="{% url 'articles:search' %}" method="GET">
+            <input class="header_input p-3" placeholder="통합검색" name="kw">
+            <input type="submit" style="display:none;">
           </form>
         </div>
+
         {% if request.user.is_authenticated %}
         <div><a class="non_a nmc" href="{% url 'accounts:detail' user.username %}">{{ user.username }}님</a></div>
 
@@ -75,43 +73,18 @@
             <li><a class="dropdown-item" href="#">상품 후기</a></li>
           </ul>
         </div>
-        {% else %}
-        <div><a class="text-body text-decoration-none" href="{% url 'accounts:signin' %} "><span
-              class="nmc">로그인</span></a></div>
-        <div><a class="text-body text-decoration-none" href="{% url 'accounts:signup' %} "><span
-              class="nmc">회원가입</span></a></div>
-        <div><span class="nmc">고객센터</span></div>
-        <div class="dropdown">
-          <button class="btn btn dropdown-toggle text-white" style="background-color:#35c5f0" type="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            글쓰기
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="{% url 'articles:create' %}">인테리어 후기</a></li>
-            <li><a class="dropdown-item" href="{% url 'products:reviews_create' 1%}">상품 후기</a></li>
-          </ul>
-        </div>
-        {% endif %}
-      </div>
-  </nav>
+      </nav>
 
-  {% block content %}{% endblock %}
+      {% block content %}{% endblock %}
 
+      <footer>
+        <!-- place footer here -->
+      </footer>
+      <!-- Bootstrap JavaScript Libraries -->
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 
-  <footer>
-    <!-- place footer here -->
-  </footer>
-  <!-- Bootstrap JavaScript Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-    crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
-    crossorigin="anonymous"></script>
+    </body>
 
-
-
-</body>
-
-</html>
+  </html>

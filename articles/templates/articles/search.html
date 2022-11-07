@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+  <div class="container" style="padding:40px 0 50px;">
+    {% if products %}
+      <h1 class="fw-bold fs-4 mt-3">상품</h1>
+      <div class="row row-cols-4 g-5">
+        {% for product in products %}
+          <a href="{% url 'products:detail' product.pk %}">
+            <section class="mb-5 col">
+              <div class="d-flex flex-column">
+                <div class="rounded-4 border border-1">
+                  <img src="{{ product.product_image.url }}" alt="" width="300" height="300" class="p-5">
+                </div>
+              </div>
+              <p class="text-muted fs-4">
+                {{ product.brand }}
+              </p>
+              <h3 class="fw-bold">
+                {{ product.title }}
+              </h3>
+              <p class="fs-4">
+                {{ product.price }}
+              </p>
+            </section>
+          {% endfor %}
+        </div>
+        <hr class="mb-5">
+      </a>
+    {% endif %}
+
+    {% if articles %}
+      <h1 class="fw-bold fs-4 mt-3">인테리어 후기</h1>
+      <div class="row row-cols-4 g-5">
+        {% for article in articles %}
+          <section class="mb-5 col">
+            <div class="d-flex flex-column">
+              <div class="rounded-4 border border-1">
+                <img src="{{ article.image.url }}" alt="" width="300" height="300" class="p-5">
+              </div>
+            </div>
+            <h3 class="fw-bold">
+              {{ article.title }}
+            </h3>
+            <p class="text-muted fs-4 d-inline">
+              조회
+              {{ article.hits }}
+            </p>
+            <p class="text-muted fs-4 d-inline">
+              좋아요
+              {{ article.like_users.count }}
+            </p>
+          </section>
+        {% endfor %}
+      </div>
+      <hr class="mb-5">
+    {% endif %}
+
+  {% endblock %}
