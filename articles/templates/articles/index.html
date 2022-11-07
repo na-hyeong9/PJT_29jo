@@ -26,61 +26,51 @@
         {% endfor %}
     </aside>
 
-    <div>
-        <section class="section-center mt-3" style="overflow-y: scroll; height: calc(100vh - 60px);">
-            <h2 class="mb-3 mx-3" style="font-size: 14px; color: #8b95a1">방금 올라온 인테리어 후기</h2>
-            <ul class="m-0 p-0">
-                {% for article in articles %}
-                <li style="list-style: none;">
-                    <a class="non_a" href="{% url 'articles:detail' article.pk article.slug %}">
-                        <div class="user-wrap mt-3" style="width: 100%; height: 300px;">
-                            <div class="user-text px-4 mt-0">
-                                {% if article.review_image %}
-                                <!-- title -->
-                                <div class="user-image mx-4 py-3">
-                                    <img class="contentcard" style="height: 400px; border-radius: 15px;"
-                                        src="http://economychosun.com/query/upload/255/20180616174128_tohfvsob.jpg"
-                                        alt="">
-                                </div>
-                                <a href="{% url 'articles:detail' article.pk article.slug %}" class="non_a"><span
-                                        class="fs-2 fw-bold">{{article.title}}</span></a>
-                                <!-- username/ create_at -->
-                                <p class="mb-0" style="font-weight: 200;">{{ article.user }}</p>
-                                <p class="mb-0" style="font-weight: 200;">{{ article.created_at }}</p>
-                                {% else %}
-                                <div class="contentcard d-flex align-items-center justify-content-center"
-                                    style="background-color: rgb(35, 35, 35); height: 200px; border-radius: 15px;">
-                                    <p class="non_a text-white" style="font-weight: 200;">이미지가 없습니다.</p>
-                                </div> <a href="{% url 'articles:detail' article.pk article.slug %}" class="non_a"><span
-                                        class="fs-2 fw-bold">{{article.title}}</span>
-                                </a>
-                                <!-- username/ create_at -->
-                                <p class="mb-0" style="font-weight: 200;">{{ article.user }}</p>
-                                <p class="mb-0" style="font-weight: 200;">{{ article.created_at }}</p>
-                                {% endif %}
-                            </div>
-                        </div>
+
+    <section class="section-center mt-3" style="overflow-y: scroll; height: calc(100vh - 60px);">
+        <h2 class="mb-3 mx-3" style="font-size: 14px; color: #8b95a1">인테리어 후기</h2>
+        {% for article in articles %}
+        <a class="non_a" href="{% url 'articles:detail' article.pk article.slug %}">
+            <div class="user-wrap mt-5" style="width: 100%; height: 300px;">
+                <div class="user-text px-4 mt-0">
+                    {% if article.review_image %}
+                    <!-- title -->
+                    <div class="user-image mx-4 py-3">
+                        <img class="contentcard" style="height: 400px; border-radius: 15px;"
+                            src="http://economychosun.com/query/upload/255/20180616174128_tohfvsob.jpg" alt="">
+                    </div>
+                    {% else %}
+                    <div class="contentcard d-flex align-items-center justify-content-center"
+                        style="background-color: rgb(35, 35, 35); height: 200px; border-radius: 15px;">
+                        <p class="non_a text-white" style="font-weight: 200;">이미지가 없습니다.</p>
+                    </div>
+                    {% endif %}
+                    <a href="{% url 'articles:detail' article.pk article.slug %}" class="non_a"><span
+                            class="fs-2 fw-bold">{{article.title}}</span>
                     </a>
-                </li>
-            </ul>
-    </div>
-    {% endfor %}
+                    <!-- username/ create_at -->
+                    <p class="mb-0" style="font-weight: 200;">{{ article.user }}</p>
+                    <p class="mb-0" style="font-weight: 200;">{{ article.created_at }}</p>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
     </section>
-</div>
-<div>
-    {% for article_hit in articles_hits %}
-    <div class="mt-3" style=" width: 100%;">
-        <div class="row m-2 p-3 d-flex justify-content-center" style="width:100%; background-color:white">
-            <div class="card m-2 col-lg-8" style="height: 150px;">
-                <img style="height: 100%;" src="{{ article_hit.image }}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text">{{article_hit.title}}
-                    </p>
+    <div>
+        {% for article_hit in articles_hits %}
+        <div class="mt-3" style=" width: 100%;">
+            <div class="row m-2 p-3 d-flex justify-content-center" style="width:100%; background-color:white">
+                <div class="card m-2 col-lg-8" style="height: 150px;">
+                    <img style="height: 100%;" src="{{ article_hit.image }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">{{article_hit.title}}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
