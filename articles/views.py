@@ -113,7 +113,9 @@ def update(request, pk, article_slug):
                 return redirect("articles:detail", article.pk, article.slug)
         else:
             article_form = ArticleForm(instance=article)
-        context = {"article_form": article_form}
+        context = {"article_form": article_form,
+                   "article" : article,
+        }
         return render(request, "articles/form.html", context)
     else:
         messages.warning(request, "작성자만 수정할 수 있습니다.")
