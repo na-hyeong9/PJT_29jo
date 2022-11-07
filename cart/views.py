@@ -18,20 +18,9 @@ def add(request, product_id):
   
     if form.is_valid():
         cd = form.cleaned_data
-        request.COOKIES['request.user'] = cd
-
-        if request.COOKIES.set_cookie('request.user'):
-            context = {
-                'cart' : request.COOKIES.set_cookie('request.user'),
-            }
-            print(request.COOKIES.set_cookie('request.user'))
-            return render(request, 'cart/cart.html', context)
-            
-        else:
-            cart.add(product=product, quantity=cd['quantity'], is_update=cd['is_update'])
-        # print('done')
+        cart.add(product=product, quantity=cd['quantity'], is_update=cd['is_update'])
     
-            return redirect('cart:detail')
+        return redirect('cart:detail')
 
 def remove(request, product_id):
     cart = Cart(request)
