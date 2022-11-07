@@ -9,8 +9,8 @@
     <section class="title-banner">
         <div class='d-flex justify-content-center' style='height:300px;'>
             {% if article.image %}
-            <img src="https://mblogthumb-phinf.pstatic.net/20151217_196/tamanoa_14503391844435U1wV_JPEG/%C5%FC%C5%FC%C0%CC_1.jpg?type=w2"
-                alt="" class='w-100' style='height:300px; object-fit:cover; filter:brightness(0.6);'>
+            <img src="{{article.image.url}}" alt="" class='w-100'
+                style='height:300px; object-fit:cover; filter:brightness(0.6);'>
         </div>
         {% else %}
         <div class="bg-dark w-100" style="height: 300px"></div>
@@ -29,7 +29,7 @@
         <p class="my-5">{{ article.content }}</p>
         </p>
         {% if article.image %}
-        <img src="{{ article.image.url }}" alt="{{ article.image }}" width=p00" height="300">
+        <img src="{{ article.image.url }}" alt="{{ article.image }}" height="300">
         {% endif %}
         <div class="my-2">
             <!-- 로그인 했다면 -->

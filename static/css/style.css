@@ -92,8 +92,8 @@ label:focus,
 
 .user-text {
   position: absolute;
-  bottom: 5px;
-  left: 20px;
+  bottom: -5px;
+  left: 60px;
   width: 100%;
   font: size 36px;
   font-family: 'card';
