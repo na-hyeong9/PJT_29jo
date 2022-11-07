@@ -46,7 +46,7 @@ class Article(models.Model):
         Category,
         on_delete=models.SET_NULL,
         null=True,
-        related_name="articles",
+        related_name="category",
     )
     slug = models.SlugField(
         max_length=20,

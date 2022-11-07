@@ -12,6 +12,7 @@ class ArticleForm(forms.ModelForm):
             "content",
             "image",
             "category",
+            "slug",
         ]
 
 

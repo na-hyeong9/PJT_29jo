@@ -8,6 +8,7 @@
     <div class="p-4" style="box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%); border-radius: 15px;">
         <form class="p-5" action="{% url 'articles:create' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
+
             <div class=" d-flex justify-content-end">
                 <input class="btn" style="color: #33c4f0;" type="submit" value="작성완료"></input>
             </div>

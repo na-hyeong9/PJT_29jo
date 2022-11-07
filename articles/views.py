@@ -88,14 +88,14 @@ def update(request, pk, article_slug):
             article_form = ArticleForm(request.POST, request.FILES, instance=article)
             if article_form.is_valid():
                 article_form.save()
-                return redirect("articles:detail", article.pk)
+                return redirect("articles:detail", article.pk, article.slug)
         else:
             article_form = ArticleForm(instance=article)
         context = {"article_form": article_form}
         return render(request, "articles/form.html", context)
     else:
         messages.warning(request, "작성자만 수정할 수 있습니다.")
-        return redirect("articles:detail", article.pk, article_slug)
+        return redirect("articles:detail", article.pk, article.slug)
 
 
 @login_required
@@ -116,7 +116,7 @@ def comment_create(request, pk, article_slug):
         comment.article = article
         comment.user = request.user
         comment.save()
-    return redirect("articles:detail", article.pk)
+    return redirect("articles:detail", article.pk, article.slug)
 
 
 @login_required
@@ -126,7 +126,7 @@ def comment_update(request, pk, article_slug):
         article = Article.objects.get(pk=pk, slug=article_slug)
         comment_update = article.comment_set.all()
         # comment 폼 가져오기
-    return redirect("articles:detail", article.pk)
+    return redirect("articles:detail", article.pk, article_slug)
 
 
 @login_required
