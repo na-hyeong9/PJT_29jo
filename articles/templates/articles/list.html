@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<div>
+    <div class="row">
+        <div class="mt-5 List-group d-flex justify-content-center">
+            <p><a class="mx-2 btn btn-outline-secondary btn btn-sm text-decoration-none List-group-item {% if not current_category %} active {% endif %}"
+                    href="{% url 'articles:article_all' %}">전체</a>
+            </p>
+            {% for c in categories %}
+            <p><a class="mx-2 btn btn-outline-secondary btn btn-sm text-decoration-none List-group-item {% if current_category.slug == c.slug %} active {% endif %}"
+                    href="{{c.get_absolute_url}}">{{c.name}}</a>
+            </p>
+            {% endfor %}
+        </div>
+
+        <div class="row">
+            <div class="alert alert-light fw-bold text-center fs-2">
+                {% if current_category %}
+                {{ current_category.name}}
+                {% else %}
+                All
+                {% endif %}
+            </div>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-center mt-3">
+            <div class="row p-3 d-flex" style="width:745px; background-color:white">
+                {% for article in articles %}
+                <div class="card m-2 col-lg-3" style="width: 30%;">
+                    <img src="{{ article.image.url }}" class="py-2 card-img-top" alt="..." style="height: 150px;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{article.title}}</h5>
+                        <p class="card-text">{{article.user}}</p>
+                        <p class="card-text"><small class="text-muted">{{article.created_string}}</small>
+                        </p>
+                        <p><a href="{{article.get_absolute_url}}">detail</a></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}

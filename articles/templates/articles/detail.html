@@ -18,42 +18,15 @@
         <div class="title-text d-flex justify-content-center align-items-center flex-column">
             <h3 class="fw-bold text-white" style="font-size: 38px;">{{article.title}}</h3>
             <div>
-                <p class="text-white" style="font-weight: 200">작성자 | {{article.created_at|date:'Y.m.d'}}</p>
+                <p class="text-white" style="font-weight: 200">작성자 {{article.user}} |
+                    {{article.created_at|date:'Y.m.d'}}</p>
             </div>
         </div>
     </section>
 
     <div class="my-3 p-4 container" style="background-color:white; width: 700px;">
         <p style="line-height: 32px; color: rgb(47, 52, 56); font-weight: 300;">
-            적당한 빛만 있으면 사진이 알아서 잘 나오는 줄 알았던 저 에디터 밤. '분명 똑같은 건데.. 내 사진은 왜 저 느낌이 안 나지?' 고민하곤 했는데요. 요즘엔 휴대폰 카메라도, 어플도 모두 잘
-            되어 있으니 휴대폰으로 '한 끗 차이로 잘 찍는 법'을 잔뜩 연구해 봤습니다. 그 두 번째 사진 기록 팁을 전격 공개합니다👀
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. A ipsum facilis, eum laudantium ducimus
-            exercitationem doloribus, saepe qui deleniti, provident nesciunt. Rem atque illo ratione magnam eius eum,
-            doloremque vel?
-            Totam inventore modi minima facere doloremque voluptatum rerum dolorem dolorum adipisci dolor amet in saepe
-            aut, non odit accusantium, sequi quaerat ullam nulla! Enim illo quaerat eum est veniam! Unde!
-            Officia atque dolorem beatae quo incidunt iste consequuntur pariatur corrupti cum suscipit. Beatae molestiae
-            voluptas, quam deleniti labore facere, impedit corporis reprehenderit ipsum quod, sit laboriosam aperiam
-            pariatur eum iusto.
-            At fugit facilis, provident, excepturi eaque aliquam quidem nihil, fugiat reiciendis qui quibusdam repellat
-            repudiandae quis? Dignissimos nesciunt ut totam animi error eos, magni porro sapiente aperiam quo saepe
-            eaque.
-            Earum nulla amet at obcaecati expedita explicabo suscipit molestias nesciunt eius dolorum? Culpa, sit quam
-            rem iste quasi nihil? Accusantium excepturi quasi optio vero impedit numquam voluptatibus corporis sunt qui?
-            Fugiat, natus quia! Quam voluptates quae et sint, voluptas ad laborum soluta, ipsam error modi impedit
-            debitis adipisci saepe libero fugiat quidem quis ipsa aliquid incidunt voluptatem eius id! Odio.
-            Laboriosam dolores quo, aperiam neque in eveniet, adipisci beatae eos nemo nihil dolor itaque similique
-            odio? Rerum doloremque tenetur adipisci amet molestiae quis velit vero minus quod, pariatur laudantium
-            similique!
-            Earum officiis culpa harum rem labore? Labore commodi eum possimus cupiditate fugit ducimus dignissimos id,
-            molestias nesciunt ullam similique saepe veniam sunt repellendus ex corporis quod ipsam aspernatur soluta
-            dolorem.
-            Incidunt, dolore praesentium voluptatibus officiis minima soluta nostrum quis, dicta nisi, dignissimos
-            saepe. Sequi expedita dignissimos accusantium iure quo ab illum voluptatem? Doloremque, eum fuga ullam
-            quibusdam sequi at quam.
-            Sit, esse aperiam? Aspernatur quibusdam, ullam maxime illum beatae blanditiis facilis debitis asperiores
-            veniam voluptate autem, consectetur, atque saepe expedita itaque? Pariatur quo deserunt dolores a nisi nemo
-            illo quisquam?
+        <p class="my-5">{{ article.content }}</p>
         </p>
         {% if article.image %}
         <img src="{{ article.image.url }}" alt="{{ article.image }}" width=p00" height="300">
@@ -68,14 +41,16 @@
             {% endif %}<span id="like-count">{{ article.like_users.count }}</span>
             {% endif %}
         </div>
-        <p class="my-5">{{ article.content }}</p>
         <div class="d-flex justify-content-end">
-            <a class="nav_a btn btn-link" href="{% url 'articles:index' %}">돌아가기</a>
+            <a class="nav_a btn btn-link" style="text-decoration: none; color:#33c4f0;"
+                href="{% url 'articles:index' %}">돌아가기</a>
             {% if request.user == article.user %}
-            <a class="nav_a btn btn-link" href="{% url 'articles:update' article.pk %}">수정</a>
+            <a class="nav_a btn btn-link" style="text-decoration: none; color:#33c4f0;"
+                href="{% url 'articles:update' article.pk article.slug %}">수정</a>
             {% endif %}
             <!-- 삭제 모달 -->
-            <a class="nav_a btn btn-link" data-bs-toggle="modal" data-bs-target="#delete-modal">
+            <a class="nav_a btn btn-link" style="text-decoration: none; color:#33c4f0;" data-bs-toggle="modal"
+                data-bs-target="#delete-modal">
                 삭제
             </a>
             <!-- Modal -->
@@ -90,7 +65,8 @@
                             삭제하면 내용을 되돌릴 수 없습니다.
                         </div>
                         <div class="modal-footer">
-                            <a class="btn btn-danger" href="{% url 'articles:delete' article.pk %}">삭제하기</a>
+                            <a class="btn btn-secondary btn-sm"
+                                href="{% url 'articles:delete' article.pk article.slug %}">삭제하기</a>
                             </button>
                         </div>
                     </div>
@@ -100,28 +76,29 @@
         <hr>
         <p class="my-3" style="color: rgb(115, 115, 115)">댓글 <span
                 style="font-weight: 500; color:#33c4f0;">{{article.comment_set.all|length}}</span></p>
-        <ul class="menu">
-            {% for comment in comments %}
-            <li>
-                {{ comment.user }} - {{ comment.content }}
+        {% for comment in comments %}
+        {% csrf_token %}
+        <div class="d-flex justify-content-between">
+            <div>
+                <span class="fw-bold">{{ comment.user }}</span> <span>{{ comment.content }}</span>
+            </div>
+            <div>
                 <!--delete-->
                 {% if user == comment.user %}
-                <form action="{% url 'articles:comments_delete' article.pk comment.pk %}" method="POST"
-                    class="d-inline">
-                    {% csrf_token %}
-                    <button type="submit">삭제</button>
-                </form>
+                <a class="" style="text-decoration: none; color:#33c4f0;"
+                    href="{% url 'articles:comments_delete' article.pk article.slug comment.pk %}">삭제</a>
                 {% endif %}
-            </li>
-            {% empty %}
-            {% endfor %}
+            </div>
+        </div>
+        {% empty %}
+        {% endfor %}
         </ul>
 
         <hr>
 
         <!--create-->
         {% if request.user.is_authenticated %}
-        <form action="{% url 'articles:comment_create' article.pk %}" method="POST">
+        <form action="{% url 'articles:comment_create' article.pk article.slug %}" method="POST">
             {% csrf_token %}
             <div class="row d-flex justify-content-center align-items-center">
                 <textarea class="comment-input p-3" rows="2" cols="10" class="form-control mt-3" name="content"

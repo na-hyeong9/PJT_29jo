@@ -26,7 +26,7 @@ SECRET_KEY = os.path.join(BASE_DIR, "secrets.json")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -36,8 +36,9 @@ INSTALLED_APPS = [
     "accounts",
     "articles",
     "imagekit",
+    "cart",
     "django_bootstrap5",
-    'django_social_share',
+    "django_social_share",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -141,3 +142,7 @@ MEDIA_LOOT = BASE_DIR / "media"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "accounts.User"
+
+CART_ID = 'cart_item'
+
+ACCOUNT_SESSION_REMEMBER = True

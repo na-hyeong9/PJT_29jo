@@ -19,93 +19,59 @@
     {% endblock css %}
 
   </head>
+<body>
+  <nav>
+    <div class="header">
+      <div class="header_main">
+        <div class="nav_start">
+          <a class="main_logo" alt="오늘의집 로고" href="{% url 'articles:index' %}">
+            <img class="logo" src="{% static 'img/logo3.png' %}" alt="오늘의집 홈" width="100" height="30"
+              viewBox="0 0 74 30">
+          </a>
+        </div>
+        <!-- <div class="nav_left"> -->
+        <div class="nav_main">
+          <a clsss="nav_main_content" style="text-decoration: none; color:black;" href="{% url 'products:detail' 1 %}">
+            <span class=" nmc"><b>상품후기</b></span>
+          </a>
+        </div>
+        <div class="nav_main">
+          <a clsss="nav_main_content" style="text-decoration: none; color:black;" href="{% url 'articles:article_all' %}">
+            <span class=" nmc" href="/index.html"><b>인테리어후기</b></span>
+          </a>
+        </div>
 
-  <body>
-    <nav>
-      <div class="header">
-        <div class="header_main">
-          <div class="nav_start">
-            <a class="main_logo" alt="오늘의집 로고" href="{% url 'articles:index' %}">
-              <img class="logo" src="{% static 'img/logo3.png' %}" alt="오늘의집 홈" width="100" height="30" viewbox="0 0 74 30">
-            </a>
-          </div>
-          <!-- <div class="nav_left"> -->
-          <div class="nav_main">
-            <a clsss="nav_main_content" style="text-decoration: none; color:black;" href="{% url 'products:detail' 1 %}">
-              <span class=" nmc">
-                <b>상품후기</b>
-              </span>
-            </a>
-          </div>
-          <div class="nav_main">
-            <a clsss="nav_main_content" style="text-decoration: none; color:black;" href="{% url 'articles:detail' 1 %}">
-              <span class=" nmc" href="/index.html">
-                <b>인테리어후기</b>
-              </span>
-            </a>
-          </div>
+        <!-- </div> -->
+        <div class="nav_search">
+          <form class="search_form" action="{% url 'articles:search' %}" method="GET">
+            <input class="header_input p-3" placeholder="통합검색" name="kw">
+            <input type="submit" style="display:none;">
+          </form>
+        </div>
 
-          <!-- </div> -->
-          <div class="nav_search">
-            <form class="search_form" action="{% url 'articles:search' %}" method="GET">
-              <input class="header_input p-3" placeholder="통합검색" name="kw">
-              <input type="submit" style="display:none;">
-            </form>
-          </div>
-          {% if request.user.is_authenticated %}
-            <div>
-              <a class="non_a nmc" href="{% url 'accounts:detail' user.username %}">{{ user.username }}님</a>
-            </div>
-            <div>
-              <a class="text-body text-decoration-none" href="{% url 'accounts:signout' %} ">
-                <span class="nmc">로그아웃</span></a>
-            </div>
-            <a class="p-2 position-relative non_a" href="{% url 'articles:index' %}">
-              장바구니
-              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" style="background-color: #35c5f0;">
-                99+
-                <span class="visually-hidden">unread message</span>
-              </span>
-            </a>
-            <!-- 후기 -->
-            <div class="dropdown mx-4">
-              <button class="btn btn dropdown-toggle text-white" style="background-color:#35c5f0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                글쓰기
-              </button>
-              <ul class=" dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li>
-                  <a class="dropdown-item" href="{% url 'articles:create' %}">인테리어 후기</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">상품 후기</a>
-                </li>
-              </ul>
-            </div>
-          {% else %}
-            <div>
-              <a class="text-body text-decoration-none" href="{% url 'accounts:signin' %} ">
-                <span class="nmc">로그인</span></a>
-            </div>
-            <div>
-              <a class="text-body text-decoration-none" href="{% url 'accounts:signup' %} ">
-                <span class="nmc">회원가입</span></a>
-            </div>
-            <div>
-              <span class="nmc">고객센터</span></div>
-            <div class="dropdown">
-              <button class="btn btn dropdown-toggle text-white" style="background-color:#35c5f0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                글쓰기
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li>
-                  <a class="dropdown-item" href="{% url 'articles:create' %}">인테리어 후기</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="{% url 'products:reviews_create' 1%}">상품 후기</a>
-                </li>
-              </ul>
-            </div>
-          {% endif %}
+        {% if request.user.is_authenticated %}
+        <div><a class="non_a nmc" href="{% url 'accounts:detail' user.username %}">{{ user.username }}님</a></div>
+
+        <a class="p-2 position-relative non_a" href="{% url 'cart:detail' %}">
+          장바구니
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+            style="background-color: #35c5f0;">
+            {{cart.cartitem.len}}
+            <span class="visually-hidden">unread message</span>
+          </span>
+        </a>
+        <div><a class="text-body text-decoration-none" href="{% url 'accounts:signout' %} "><span
+              class="nmc">로그아웃</span></a></div>
+        <!-- 후기  -->
+        <div class="dropdown">
+          <button class="btn btn dropdown-toggle text-white" style="background-color:#35c5f0" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            글쓰기
+          </button>
+          <ul class=" dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="{% url 'articles:create' %}">인테리어 후기</a></li>
+            <li><a class="dropdown-item" href="#">상품 후기</a></li>
+          </ul>
         </div>
       </nav>
 
