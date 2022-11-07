@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-{% if not cart_items %}
+{% if not cart %}
 <div>
   <div class="text-center">
     <br>
@@ -30,7 +30,7 @@
           </tr>
         </thread>
         <tbody>
-          {% for cart_item in cart_items %}
+          {% for cart_item in cart %}
           <tr>
             <td>
               <a href="{{cart_item.product.get_absolute_url}}"><img src="cart_item.product.product_image.url"></a>
