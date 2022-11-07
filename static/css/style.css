@@ -25,13 +25,8 @@ label:focus,
 }
 
 .header {
-  position: sticky;
-  top: 0px;
-  width: auto;
-  height: 80px;
   background-color: #ffffff;
   letter-spacing: -.4px;
-  z-index: 1;
 }
 
 .header_main {
@@ -43,7 +38,6 @@ label:focus,
   /* position: fixed; */
   max-width: 1256px;
   justify-content: space-between;
-  height: 80px;
   margin: 0 auto;
   box-sizing: border-box;
   padding: 10px 60px;
@@ -90,22 +84,13 @@ label:focus,
   vertical-align: middle;
 }
 
-.contentcard:hover {
-  border-radius: 15px;
-  transform: translateY(-10px);
-  transition: all ease-in-out .3s;
-  box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%);
-}
-
-/* .user-text {
+.user-text {
   position: absolute;
   bottom: -5px;
-  left: 60px;
   width: 100%;
   font: size 36px;
   font-family: 'card';
-  text-align: conter;
-} */
+}
 
 /* star-rating */
 .star-ratings {
@@ -189,4 +174,11 @@ label:focus,
 .comment-input:focus {
   border: 1px solid #34c5f0;
   border-radius: 10px;
+}
+
+.contentcard:hover {
+  border-radius: 15px;
+  transform: translateY(-10px);
+  transition: all ease-in-out .3s;
+  box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%);
 }
