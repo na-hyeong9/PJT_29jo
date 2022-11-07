@@ -142,3 +142,7 @@ MEDIA_LOOT = BASE_DIR / "media"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "accounts.User"
+
+CART_ID = 'cart_item'
+
+ACCOUNT_SESSION_REMEMBER = True

@@ -42,9 +42,12 @@
   </h1>
   <br>
   <h1>장바구니 담기
-    <span>
-      <a href="{% url 'cart:add_cart' product.pk %}">장바구니 추가</a>
-    </span>
+    <form action="{% url 'cart:product_add' product.id %}" method="POST">
+      {{ add_to_cart }}
+      {% csrf_token %}
+      <input type="submit" value="Add to Cart">
+    </form>
+
   </h1>
   내구성 :
   {{ grade_all.grade_durability__avg|floatformat }}

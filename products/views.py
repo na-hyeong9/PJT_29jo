@@ -4,12 +4,14 @@ from .models import Product, Review
 from .forms import ReviewCreationForm
 from django.db.models import Avg
 from django.contrib.auth import get_user_model
+from cart.forms import AddProductForm
 
 # Create your views here.
 
 def detail(request, product_pk):
     product = get_object_or_404(Product, pk=product_pk)
     reviews = Review.objects.all()
+    add_to_cart = AddProductForm(initial={'quantity':1}) # 장바구니 추가
     grade_all = reviews.aggregate(Avg('grade_durability'), Avg('grade_price'), Avg('grade_design'), Avg('grade_practicality'))
     grade_avg = reviews.aggregate(Avg('grade_avg'))
     # 키 -값 쌍으로
@@ -19,6 +21,7 @@ def detail(request, product_pk):
         "reviews" : reviews,
         "grade_all" : grade_all,
         "grade_avg" : grade_avg,
+        "add_to_cart" : add_to_cart, 
     }
     return render(request, "products/detail.html", context)
 
