@@ -4,7 +4,7 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-<div class="section-grid px-2 my-4">
+<div class="container section-grid px-2 my-4" style="max-width: 1512px;">
   <aside class="box mt-3" style="overflow-y: scroll; height: calc(100vh - 60px);">
     <h2 class="mb-3 mx-3" style="font-size: 14px; color: #8b95a1">오늘 많이본 상품</h2>
     {% for product in products %}
@@ -37,7 +37,8 @@
           {% if article.image %}
           <!-- title -->
           <div class="user-image mx-4 py-3">
-            <img class="contentcard" style="height: 350px; border-radius: 15px;" src="{{ article.image.url }}" alt="">
+            <img class="contentcard" style="height: 350px; border-radius: 15px; object-fit: cover;"
+              src="{{ article.image.url }}" alt="">
           </div>
           {% else %}
           <div class="contentcard d-flex align-items-center justify-content-center mx-4 mb-3"
@@ -63,7 +64,7 @@
     <div class="mt-3" style=" width: 100%;">
       <div class="row m-2 p-3 d-flex justify-content-center" style="width:100%; background-color:white">
         <div class="card m-2 col-lg-8" style="height: 150px;">
-          <img style="height: 100%;" src="{{ article_hit.image.url }}" class="card-img-top" alt="...">
+          <img style="height: 100%;" src="{{ article_hit.image }}" class="card-img-top" alt="...">
           <div class="card-body">
             <p class="card-text">{{article_hit.title}}
             </p>
