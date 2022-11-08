@@ -7,6 +7,14 @@
   color: #34c5f0;
 }
 
+.txt_line {
+  width: 70px;
+  padding: 0 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 textarea:hover,
 input:hover,
 textarea:active,
