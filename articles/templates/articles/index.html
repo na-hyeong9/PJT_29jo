@@ -80,6 +80,7 @@
           <div class="px-4">
             <a href="{% url 'articles:detail' article_hit.pk article_hit.slug %}" class="non_a">
               <span class="txt_line card-text" style="font-weight: 700;">{{article_hit.title}}</span>
+              <p class="mb-0" style="font-weight: 200;">{{ article_hit.created_at }}</p>
             </a>
           </div>
         </div>
