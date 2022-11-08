@@ -8,6 +8,15 @@ from cart.forms import AddProductForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+def index(request):
+    products = Product.objects.order_by("-pk")
+
+    context = {
+        'products' : products,
+    }
+
+    return render(request, 'products/index.html', context)
+
 
 def detail(request, product_pk):
     product = get_object_or_404(Product, pk=product_pk)
