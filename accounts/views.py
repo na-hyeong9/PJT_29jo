@@ -19,13 +19,13 @@ def signin(request):
     form = AuthenticationForm(request, data=request.POST or None)
     if form.is_valid():
         login(request, form.get_user())
-        return redirect("accounts:signup")
+        return redirect("articles:index")
     return render(request, "accounts/signin.html", {"form": form})
 
 @login_required
 def signout(request):
     logout(request)
-    return redirect('accounts:signin')
+    return redirect('articles:index')
 
 def detail(request, username):
     info = get_object_or_404(get_user_model(), username=username)
