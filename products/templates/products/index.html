@@ -4,10 +4,7 @@
 {% block content %}
 
 <body style="background-color: rgb(249, 249, 249);">
-  <aside class="container d-flex box mt-3">
-    <div>
-      <h2 class="mb-5 mx-3" style="font-size: 14px; color: #8b95a1">상품목록</h2>
-    </div>
+  <aside class="container d-flex box mt-3" style="flex-wrap: wrap;">
     {% for product in products %}
     <div class="contentcard">
       <a class="non_a" href="{% url 'products:detail' product.id %}">
