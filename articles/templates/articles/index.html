@@ -37,7 +37,8 @@
           {% if article.image %}
           <!-- title -->
           <div class="user-image mx-4 py-3">
-            <img class="contentcard" style="height: 350px; border-radius: 15px;" src="{{ article.image.url }}" alt="">
+            <img class="contentcard" style="height: 350px; border-radius: 15px; object-fit: cover;"
+              src="{{ article.image.url }}" alt="">
           </div>
           {% else %}
           <div class="contentcard d-flex align-items-center justify-content-center mx-4 mb-3"
