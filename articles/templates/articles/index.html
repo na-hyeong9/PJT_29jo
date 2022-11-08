@@ -63,20 +63,28 @@
     <h2 class="mb-3 mx-3" style="font-size: 14px; color: #8b95a1">오늘 많이본 아티클</h2>
     {% for article_hit in articles_hits %}
     <a class="non_a" href="{% url 'articles:detail' article_hit.pk article_hit.slug %}">
-      <div class="mb-5" style=" width: 100%;">
-        <div class="row mx-2  d-flex justify-content-center" style="width:100%; background-color:white">
-          <div class="card p-0" style="height: 150px; border: 0px">
-            <img class="contentcard" style="height: 100%; border-radius: 15px; object-fit: cover;"
-              src="{{ article_hit.image.url }}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="txt_line card-text" style="font-weight: 700;">{{article_hit.title}}
-              </p>
-            </div>
+      <div class="user-wrap mt-5" style="width: 100%; height: 250px;">
+        <div class="user-text px-4 mt-0">
+          {% if article.image %}
+          <!-- title -->
+          <div class="user-image mx-4 py-3">
+            <img class="contentcard" style="height: 250px; width:100%; border-radius: 15px; object-fit: cover;"
+              src="{{ article_hit.image.url }}" alt="">
+          </div>
+          {% else %}
+          <div class="contentcard d-flex align-items-center justify-content-center mx-4 mb-3"
+            style="background-color: rgb(35, 35, 35);width: 100%; height: 200px; border-radius: 15px;">
+            <p class="non_a text-white" style="font-weight: 200;">이미지가 없습니다.</p>
+          </div>
+          {% endif %}
+          <div class="px-4">
+            <a href="{% url 'articles:detail' article_hit.pk article_hit.slug %}" class="non_a">
+              <span class="txt_line card-text" style="font-weight: 700;">{{article_hit.title}}</span>
+            </a>
           </div>
         </div>
       </div>
-    </a>
-    {% endfor %}
+      {% endfor %}
   </aside>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
