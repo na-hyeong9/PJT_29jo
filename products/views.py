@@ -5,6 +5,7 @@ from .forms import ReviewCreationForm
 from django.db.models import Avg
 from django.contrib.auth import get_user_model
 from cart.forms import AddProductForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -25,6 +26,7 @@ def detail(request, product_pk):
     }
     return render(request, "products/detail.html", context)
 
+@login_required
 def reviews_create(request, product_pk):
     if request.method == "POST":
         product = Product.objects.get(pk=product_pk)
