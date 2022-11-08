@@ -7,12 +7,22 @@
   color: #34c5f0;
 }
 
-.txt_line {
+/* .txt_line {
   width: 70px;
   padding: 0 5px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+} */
+
+.txt_line {
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: keep-all;
 }
 
 textarea:hover,
