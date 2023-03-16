@@ -24,32 +24,39 @@
     </section>
 
     <div class="my-3 p-4 container" style="background-color:white; width: 700px;">
-        <p style="line-height: 32px; color: rgb(47, 52, 56); font-weight: 300;">
-        <p class="my-5" style="font-weight: 200;">{{ article.content }}</p>
-        </p>
-        {% if article.image %}
-        <img src="{{ article.image.url }}" alt="{{ article.image }}" width=p00" height="300">
-        {% endif %}
-        <div class="my-2">
+        <div class="d-flex flex-column align-items-center">
+            <p style="line-height: 32px; color: rgb(47, 52, 56); font-weight: 300;">
+            <p class="my-5" style="font-weight: 200;">{{ article.content }}</p>
+            </p>
+            {% if article.image %}
+            <img src="{{ article.image.url }}" alt="{{ article.image }}" height="300">
+            {% endif %}
+        </div>
+
+        <div class="d-flex justify-content-center my-5">
             <!-- 로그인 했다면 -->
             {% if request.user.is_authenticated %}
             {% if request.user in article.like_users.all %}
             <i id="like-btn" class="fa-solid fa-heart"></i>
             {% else %}
             <i id="like-btn" class="fa-regular fa-heart"></i>
-            {% endif %}<span id="like-count">{{ article.like_users.count }}</span>
+            {% endif %}
+            <!-- <span id="like-count">{{ article.like_users.count }}</span> -->
             {% endif %}
         </div>
+
         <div class="d-flex justify-content-end">
-            <a class="nav_a btn btn-link" style="text-decoration: none; color:#33c4f0;"
+            <a class="article_a btn btn-link"
+                style="padding:5px; font-weight: 700; text-decoration: none; color:#33c4f0;"
                 href="{% url 'articles:index' %}">돌아가기</a>
             {% if request.user == article.user %}
-            <a class="nav_a btn btn-link" style="text-decoration: none; color:#33c4f0;"
+            <a class="article_a btn btn-link"
+                style="padding:5px; font-weight: 700; text-decoration: none; color:#33c4f0;"
                 href="{% url 'articles:update' article.pk article.slug %}">수정</a>
-            {% endif %}
             <!-- 삭제 모달 -->
-            <a class="nav_a btn btn-link" data-bs-toggle="modal" data-bs-target="#delete-modal">
-                <a class="nav_a btn btn-link" style="text-decoration: none; color:#33c4f0;" data-bs-toggle="modal"
+            <a class="article_a btn btn-link" data-bs-toggle="modal" data-bs-target="#delete-modal">
+                <a class="article_a btn btn-link"
+                    style="padding:5px; font-weight: 700; text-decoration: none; color:#33c4f0;" data-bs-toggle="modal"
                     data-bs-target="#delete-modal">
                     삭제
                 </a>
@@ -74,7 +81,9 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
         </div>
+
         <hr>
         <p class="my-3" style="color: rgb(115, 115, 115)">댓글 <span
                 style="font-weight: 500; color:#33c4f0;">{{article.comment_set.all|length}}</span></p>
@@ -145,7 +154,7 @@
                     event.target.classList.remove('bi-heart-fill')
                 }
                 const likeCount = document.querySelector('#like-count')
-                likeCount.innerText = response.data.likeCount
+                <!-- likeCount.innerText = response.data.likeCount -->
             })
     })
 </script>

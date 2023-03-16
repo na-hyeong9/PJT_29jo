@@ -150,59 +150,63 @@
             </div>
           </li>
           {% if request.user.is_authenticated %}
-          <li class="nav-item" style="margin-top: 15px;">
-            <a class="non_a nmc" href="{% url 'accounts:detail' user.username %}">{{ user.username }}님</a>
-          </li>
-          <li class="nav-item center" style="margin-top: 15px;">
-            <a class="p-2 position-relative non_a" href="{% url 'cart:detail' %}">
-              장바구니
-            </a>
-          </li>
-          <li class="nav-item" style="margin-top: 15px;">
-            <a class="text-body text-decoration-none" href="{% url 'accounts:signout' %} ">
-              <span class="nmc">로그아웃</span></a>
-            </a>
-          </li>
-          <li class="nav-item dropdown" style="margin-top: 15px;">
-            <a class="nav-link dropdown-toggle btn text-white" style="background-color:#35c5f0" type="button" href="#"
-              role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              글쓰기
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" href="{% url 'articles:create' %}">인테리어 후기</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">상품 후기</a>
-              </li>
-            </ul>
-          </li>
+          <div class="right-nav">
+            <li class="nav-item" style="">
+              <a class="non_a nmc" href="{% url 'accounts:detail' user.username %}">{{ user.username }}님</a>
+            </li>
+            <li class="nav-item center" style="">
+              <a class="p-2 position-relative non_a" href="{% url 'cart:detail' %}">
+                장바구니
+              </a>
+            </li>
+            <li class="nav-item" style="">
+              <a class="text-body text-decoration-none" href="{% url 'accounts:signout' %} ">
+                <span class="nmc">로그아웃</span></a>
+              </a>
+            </li>
+            <li class="nav-item dropdown" style="">
+              <a class="nav-link dropdown-toggle btn text-white" style="background-color:#35c5f0" type="button" href="#"
+                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                글쓰기
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="{% url 'articles:create' %}">인테리어 후기</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">상품 후기</a>
+                </li>
+              </ul>
+            </li>
+          </div>
           {% else %}
-          <li class="nav-item" style="margin-top: 15px;">
-            <a class="text-body text-decoration-none" href="{% url 'accounts:signin' %} ">
-              <span class="nmc">로그인</span></a>
-          </li>
-          <li class="nav-item" style="margin-top: 15px;">
-            <a class="text-body text-decoration-none" href="{% url 'accounts:signup' %} ">
-              <span class="nmc">회원가입</span></a>
-          </li>
-          <li class="nav-item" style="margin-top: 15px;">
-            <span class="nmc">고객센터</span>
-          </li>
-          <li class="nav-item dropdown" style="margin-top: 15px;">
-            <a class="nav-link dropdown-toggle btn text-white" style="background-color:#35c5f0" type="button" href="#"
-              role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              글쓰기
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" href="{% url 'articles:create' %}">인테리어 후기</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">상품 후기</a>
-              </li>
-            </ul>
-          </li>
+          <div class="right-nav">
+            <li class="nav-item">
+              <a class="text-body text-decoration-none" href="{% url 'accounts:signin' %} ">
+                <span class="nmc">로그인</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="text-body text-decoration-none" href="{% url 'accounts:signup' %} ">
+                <span class="nmc">회원가입</span></a>
+            </li>
+            <li class="nav-item">
+              <span class="nmc">고객센터</span>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle btn text-white" style="background-color:#35c5f0" type="button" href="#"
+                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                글쓰기
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="{% url 'articles:create' %}">인테리어 후기</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">상품 후기</a>
+                </li>
+              </ul>
+            </li>
+          </div>
           {% endif %}
         </ul>
       </div>
