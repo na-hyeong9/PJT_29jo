@@ -3,13 +3,14 @@
 {% block content%}
 <div>
     <div class="row">
-        <div class="mt-5 List-group d-flex justify-content-center">
-            <p><a class="mx-2 btn btn-outline-secondary btn btn-sm text-decoration-none List-group-item {% if not current_category %} active {% endif %}"
-                    href="{% url 'articles:article_all' %}">전체</a>
+        <div class="mt-5 select_btn List-group d-flex justify-content-center">
+            <p><a class="mx-2 common_btn btn btn-sm text-decoration-none List-group-item {% if not current_category %} active {% endif %}"
+                    href="{% url 'articles:article_all' %}" style="font-weight: 600;">전체</a>
             </p>
             {% for c in categories %}
-            <p><a class="mx-2 btn btn-outline-secondary btn btn-sm text-decoration-none List-group-item {% if current_category.slug == c.slug %} active {% endif %}"
-                    href="{{c.get_absolute_url}}">{{c.name}}</a>
+            <p>
+                <a class="common_btn mx-2 btn btn-sm text-decoration-none List-group-item {% if current_category.slug == c.slug %} active {% endif %}"
+                    href="{{c.get_absolute_url}}" style="font-weight: 600;">{{c.name}}</a>
             </p>
             {% endfor %}
         </div>
@@ -25,10 +26,12 @@
         </div>
         <hr>
         <div class="d-flex justify-content-center mt-3">
-            <div class="row p-3 d-flex" style="width:745px; background-color:white">
+            <div class="row d-flex" style="width:745px; background-color:white">
                 {% for article in articles %}
-                <div class="card m-2 col-lg-3" style="width: 30%;">
-                    <img src="{{ article.image.url }}" class="py-2 card-img-top" alt="..." style="height: 150px;">
+                <div class="article_card card m-2 col-lg-3" style="width: 30%;">
+                    <a href="{{article.get_absolute_url}}">
+                        <img src="{{ article.image.url }}" class="py-2 card-img-top" alt="..." style="height: 150px;">
+                    </a>
                     <div class="card-body">
                         <div class="d-flex justify-content-center align-items-center">
                             <!-- 로그인 했다면 -->
@@ -38,15 +41,17 @@
                             {% else %}
                             <i id="like-btn" class="fa-regular fa-heart"></i>
                             {% endif %}
-                            <span id="like-count">{{ article.like_users.count }}</span>
+                            <div id="like-count">{{ article.like_users.count }}</div>
                             {% endif %}
                         </div>
-                        <div class="article_sub">
-                            <a href="{{article.get_absolute_url}}">{{article.title}}</a>
-                            <p class="card-text">{{article.user}}</p>
-                            <p class="card-text"><small class="text-muted">{{article.created_string}}</small>
-                            </p>
-                        </div>
+                        <a href="">
+                            <div class="article_sub">
+                                <a href="{{article.get_absolute_url}}">{{article.title}}</a>
+                                <p class="card-text">{{article.user}}</p>
+                                <p class="card-text"><small class="text-muted">{{article.created_string}}</small>
+                                </p>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 {% endfor %}

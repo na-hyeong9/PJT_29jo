@@ -63,6 +63,8 @@ def create(request):
     if request.method == "POST":
         # DB에 저장하는 로직
         article_form = ArticleForm(request.POST, request.FILES)
+        category = Category.objects.all()
+        print(category)
         # 유효성 검사
         if article_form.is_valid():
             article = article_form.save(commit=False)
@@ -74,6 +76,7 @@ def create(request):
     else:
         article_form = ArticleForm()
     context = {"article_form": article_form}
+    
     return render(request, "articles/form.html", context=context)
 
 

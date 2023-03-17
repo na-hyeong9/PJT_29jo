@@ -11,6 +11,7 @@ class ArticleForm(forms.ModelForm):
             "title",
             "content",
             "image",
+            "category"
         ]
 
 

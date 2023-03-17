@@ -236,6 +236,10 @@ label:focus,
   padding: 0;
 }
 
+.article_card:hover {
+  border: 1px solid #34c5f0;
+}
+
 .article_sub {
   display: flex;
   flex-direction: column;
@@ -245,13 +249,15 @@ label:focus,
   text-decoration: none;
   color: #34c5f0;
   font-weight: 700;
-  padding: 10px 10px;
+  padding: 5px 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .article_sub > a:hover {
-  text-decoration: none;
   color: #a0a0a0;
-  padding: 15px 10px;
+  padding: 5px 10px;
 }
 
 .article_sub > p {
@@ -259,4 +265,12 @@ label:focus,
   padding: 0 10px;
   font-size: small;
   -webkit-text-size-adjust: auto;
+}
+
+.common_btn {
+  color: #a0a0a0;
+}
+
+.select_btn {
+  color: #34c5f0;
 }

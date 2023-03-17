@@ -8,6 +8,13 @@
   <div class="p-3" style="box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%); border-radius: 15px;">
     <form class="p-4" action="" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
+      <select name="" id="">
+        <option id="유럽" name="category" value="유럽">유럽</option>
+        <option id="모던" name="category" value="모던">모던</option>
+        <option id="빈티지" name="category" value="빈티지">빈티지</option>
+        <option id="유니크" name="category" value="유니크">유니크</option>
+        <option id="내추럴" name="category" value="내추럴">내추럴</option>
+      </select>
       <div class=" d-flex justify-content-end">
         <input class="btn" style="color: #33c4f0;" type="submit" value="작성완료"></input>
       </div>
@@ -19,4 +26,4 @@
       <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/jpg">
     </form>
   </div>
-{% endblock %}
+  {% endblock %}
